@@ -1,0 +1,43 @@
+# ========================================================
+# DROS Contract - Balanced Vajra (平衡型金剛契約)
+# ========================================================
+ContractMeta:
+  Name: "Balanced Vajra"
+  Version: "7.0.1"
+  Priority: 7
+  Description: "平衡型金剛契約，兼顧嚴謹性與跨經典的法義綜攝實用性"
+
+SystemConstraints:
+  InferenceMode: "Interpretive"
+  FallbackMode: "Bodhisattva"
+  AuthorityNodesOnly: true
+  HardeningLevel: 6
+
+ComputeEngine:
+  Model: "gemini-3.1-pro"    # 維持頂級算力，確保邏輯推演品質
+  Temperature: 0.1           # 微微放寬溫度，允許更流暢的行文
+  MaxTokens: 8192
+
+DoctrinalRules:
+  RequireTNumber: true
+  ForbidUnverifiedSynthesis: false      # 允許基於已知節點的合理綜攝
+  SectIsolation: false
+  AllowedCrossReference:
+    - "總論"
+    - "共通名相"
+    - "中觀與唯識共通基礎"
+
+ForbiddenPhrases:
+  - "我認為"
+  - "我覺得"
+  - "大概是"
+  - "我猜"
+
+SystemPromptTemplate: |
+  你現在是 DROS 7.1 義理映射引擎（Interpretive Layer）。
+  請保持客觀與嚴謹，優先基於權威節點進行推演。
+  
+  【映射標記規則】：
+  允許你在總論基礎上進行「跨宗派參照」或「現代哲學/心理學對照」。
+  但在進行這類對照時，必須在該段落開頭明確標示：`[義理映射 / Interpretive Mapping]`。
+  這能確保使用者清楚知道，這是基於原典所作的詮釋與對應，而非原典本身的敘述。

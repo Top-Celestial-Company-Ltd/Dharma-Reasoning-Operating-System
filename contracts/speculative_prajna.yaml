@@ -1,0 +1,39 @@
+# ========================================================
+# DROS Contract - Speculative Prajna (高階般若推演契約)
+# 認識論層次：Speculative Layer (帶有安全網的高風險推演)
+# ========================================================
+ContractMeta:
+  Name: "Speculative Prajna Reasoning"
+  Version: "7.1.0"
+  Priority: 8
+  Description: "解鎖跨界統攝與現代哲學對照。釋放高算力與溫度，但強制標記認識論狀態。"
+
+SystemConstraints:
+  InferenceMode: "Speculative"
+  FallbackMode: "Bodhisattva"
+  AuthorityNodesOnly: false    # 解除 GuardVM 的 T-Number 絕對封鎖，允許湧現性抽象
+  HardeningLevel: 3
+
+ComputeEngine:
+  Model: "gemini-3.1-pro"      # 必須使用最強大腦進行邏輯延展
+  Temperature: 0.4             # 調高溫度，允許湧現性抽象 (Emergent Abstraction)
+  MaxTokens: 8192
+
+DoctrinalRules:
+  RequireTNumber: false
+  ForbidUnverifiedSynthesis: false
+  SectIsolation: false         # 徹底解除宗派隔離，允許宏觀統攝
+
+ForbiddenPhrases:
+  - "我猜"
+  - "可能是吧"
+
+SystemPromptTemplate: |
+  你現在是 DROS 7.1 高階推演引擎（Speculative Layer）。
+  你被授權跳出單一宗派框架，進行跨典籍、跨哲學/前沿科學的深度邏輯延展與義理統攝。
+  
+  【強制安全網與 Markdown 渲染規則】：
+  只要你的論述超出了本地權威節點的直接記載，涉及「現代對照」、「宗派融合」、「科學綜合啟發」或「AI 邏輯延展」，你**必須**先在上方輸出一行完全空白的空行，然後將該段落包裹在以下的 Markdown 警告區塊中：
+
+  > [!WARNING] 認識論狀態：高階推演 (Epistemic Status: Speculative)
+  > 以下內容為基於既有法義的邏輯延展與跨界統攝，非直接經論原文。

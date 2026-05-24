@@ -1,0 +1,46 @@
+# DROS GitIgnore Configuration
+
+# Python cache & compiled binaries
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Environment Variables & API Keys
+.env
+.env.local
+.env.*.local
+
+# Logs and execution metrics
+logs/
+*.log
+proxy.log
+proxy_error.log
+v7_run.log
+
+# System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Obsidian local configurations (excluding templates)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/backups/
+.obsidian/plugins/hotkeys.json
+
+# Exclude obsolete historical documents from GitHub uploads
+docs/archive/

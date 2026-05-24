@@ -1,0 +1,26 @@
+# DROS 7.0 Packaging Manifest
+include LICENSE
+include LICENSE.md
+include README.md
+include config.yaml
+include requirements.txt
+include install.bat
+include install.sh
+include run.bat
+include run.sh
+include 雙擊執行-DROS金剛注射器.bat
+
+# 遞迴包含所有非程式碼的法義與契約資源
+recursive-include contracts *.yaml
+recursive-include docs *.md
+recursive-include core *.md
+recursive-include User_Pavilion *.md
+
+# 包含所有子模組與指令碼
+recursive-include src *.py
+recursive-include proxy *.py
+recursive-include scripts *.py
+recursive-include tools *.py
+
+# 排除舊版歷史文件與歸檔
+prune docs/archive
