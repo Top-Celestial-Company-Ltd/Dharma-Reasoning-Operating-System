@@ -1,0 +1,17 @@
+{
+  "langMode": "zh",
+  "customPromptPath": "",
+  "injectContract": true,
+  "injectNodes": true,
+  "injectRuntimeMode": true,
+  "customPromptPosition": "suffix",
+  "engineMode": "direct",
+  "geminiApiKey": "AIzaSyAJM9u6dVz_LmBE2A0xBDZpYNe2U9d-OaM",
+  "routerModel": "gemini-2.5-flash",
+  "synthesizerModel": "gemini-2.5-pro",
+  "customEndpoint": "",
+  "customModel": "",
+  "customRouterModel": "",
+  "customApiKey": "",
+  "customApiFormat": "openai"
+}
