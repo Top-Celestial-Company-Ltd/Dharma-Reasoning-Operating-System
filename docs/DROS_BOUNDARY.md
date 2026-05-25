@@ -2,7 +2,7 @@
 **DROS 系統行為邊界與認識論防護原則**
 
 ```text
-Status: DROS-v7.1-Boundary-Finalized
+Status: DROS-v7.2-Boundary-Finalized
 Parent Specification: SAFETY.md
 Compliance Level: Strictly Enforced by GuardVM
 ```
@@ -14,7 +14,7 @@ Compliance Level: Strictly Enforced by GuardVM
 * **中：理歸系統，事歸行者。**
 * **EN: Logic to the System, Practice to the Practitioner.**
 
-DROS 7.0+ 是一個旨在對大語言模型（LLM）進行精確文獻檢索與教理邏輯約束的**語意運行時系統 (A Semantic Runtime System)**。為防止名相幻覺並確保 AI 治理的安全合規性，本系統嚴格遵守以下**五大系統邊界（The Five Non-Involvement Pillars）**：
+DROS 7.2+ 是一個旨在對大語言模型（LLM）進行精確文獻檢索與教理邏輯約束的**語意運行時系統 (A Semantic Runtime System)**。為防止名相幻覺並確保 AI 治理的安全合規性，本系統嚴格遵守以下**五大系統邊界（The Five Non-Involvement Pillars）**：
 
 ---
 
