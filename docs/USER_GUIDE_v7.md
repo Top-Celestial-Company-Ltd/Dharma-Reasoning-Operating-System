@@ -43,6 +43,27 @@
 6. **啟動 DROS 核心推理引擎 (代理伺服器)**: 在專案資料夾中，雙擊執行 `start_gemini_proxy.vbs` (Mac/Linux 用戶請在終端機執行 `python src/proxy/gemini_proxy.py`)。此程式啟動後會要求您輸入第 3 步申請的 Gemini API Key。
 7. **開始法義問答**: 回到 Obsidian，在右側面板或透過指令打開 **DROS Doctrinal Copilot** 的專屬聊天視窗。您現在已經可以與「零幻覺的數位伴讀」進行最高維度的法義對話了！
 
+---
+
+## ⚙️ 外掛設定模式 (Plugin Configuration Modes)
+
+打開 `DROS Doctrinal Copilot` 的外掛設定頁面，我們提供三種不同深度的使用模式。對於初學者，我們強烈推薦最單純的預設模式：
+
+### 1. 預設純淨模式 (Zero-Ops Default Mode) —— 【最推薦】
+最單純、最防呆的模式，隨裝即用，不需要執行任何 Python 背景伺服器。
+- **設定方式**：在設定頁面的 `Gemini API Key` 欄位填入您從 Google AI Studio 申請的 Key 即可。
+- **運作原理**：外掛會直接使用內建的 WebAssembly 引擎與基礎 500 個高頻名相庫，直接與 Google API 連線。適合一般輕度佛學研討與快速定錨。
+
+### 2. 金剛爪企業版模式 (VajraClaw Enterprise Mode)
+解鎖終極的「1.6萬個黃金節點」完整圖譜尋址能力，達到 0 幻覺的最高推演境界。
+- **設定方式**：除了填入 Gemini API Key，請在下方的 `VajraClaw License Key` 欄位填入您購買的企業授權碼。
+- **運作原理**：系統驗證金鑰後，將解鎖並掛載完整的 `dros_golden_manifest.json` 巨型資料集，開啟深度的天台/唯識權重推演機制。
+
+### 3. 極客開發者模式 (Local Proxy Mode)
+如果您是想自己修改 Python 核心演算法 (例如修改 `Weaver` 或 `GuardVM`) 的開發者，請使用此模式。
+- **設定方式**：開啟 `Enable Local Proxy` 選項，並將 API Endpoint 指向 `http://127.0.0.1:8080/v1`。
+- **運作原理**：所有對話與定錨請求不再由外掛直接處理，而是轉發給本機背景運行的 `gemini_proxy.py`，讓您享受 100% 的演算法修改自由度。
+
 > [!TIP]
 > **🏷️ 分類物理與語意解耦之安全提示 (Sectarian Taxonomy Decoupling)**
 > - **無感免疫機制**：DROS 本地倒排檢索核心在處理使用者資料時，**完全忽略物理資料夾路徑，只以單一的「檔案名稱」作為名相節點的唯一識別標誌**。
