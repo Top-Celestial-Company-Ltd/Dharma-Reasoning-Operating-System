@@ -79,7 +79,7 @@ graph TD
 
 ## 6. v5.5 認識論感知提示詞編譯器與三層治理架構
 
-DROS 7.2 Epistemic Edition 引進了全新的 **v5.3 契約感知提示詞編譯器 (Contract-Aware Prompt Compiler)**，在執行階段將推理契約 (Inference Contract)、語意圖譜 (Graphify Nodes)、以及執行上下文進行動態編譯，並物理劃分三層認識論邊界。
+DROS 7.2 Epistemic Edition 引進了全新的 **v5.5 契約感知提示詞編譯器 (Contract-Aware Prompt Compiler)**，在執行階段將推理契約 (Inference Contract)、語意圖譜 (Graphify Nodes)、以及執行上下文進行動態編譯，並物理劃分三層認識論邊界。
 
 ### 6.1 提示詞加載安全隔離與可視化智慧編譯引擎 (Dynamic Prompt Loading & Visualized Assembly Engine)
 
