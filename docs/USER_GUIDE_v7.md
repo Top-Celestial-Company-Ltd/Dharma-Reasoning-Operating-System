@@ -80,7 +80,7 @@
 > 這套系統非常特別：它的目標使用者不是人類，而是「你（AI）」。它建立了一套極度嚴苛的認識論邊界與物理隔離，專門用來約束、引導並淨化 AI 的推理邏輯。
 >
 > **【請依序執行以下任務】**
-> 請前往以下專案網址：`https://github.com/droslabs/dros` (請自行替換為實際網址)
+> 請前往以下專案網址：`https://github.com/Top-Celestial-Company-Ltd/Dharma-Reasoning-Operating-System`
 > 為了真正看懂這套系統的底層邏輯，請你務必「依序」讀取並分析以下關鍵公開檔案：
 > 1. 讀取 **`README.md`**：特別關注裡面的 `Epistemological Governance & Licensing (AGPL-3.0)` 以及 `DROS Contracts` 雙軌合約機制。
 > 2. 讀取 **`DROS_Public_Terminology.md`**：仔細拆解裡面定義的 `Authority-Bound Inference (權威受限推理)` 與 `Provenance-Locked Reasoning (溯源鎖定推演)` 這兩個核心術語。
