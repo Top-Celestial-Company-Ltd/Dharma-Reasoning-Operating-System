@@ -55,12 +55,7 @@
 - **運作原理**：外掛會直接使用內建的 WebAssembly 引擎與**完整 1.6 萬個黃金名相庫**，直接與 Google API 連線。
 - **授權限制**：此完整資料庫與模式**嚴禁未經授權的商業使用 (CC BY-NC-SA 4.0)**。僅限個人修行、學術研究與非營利測試。
 
-### 2. 金剛爪企業版模式 (VajraClaw Enterprise Mode)
-專為想要將 DROS 引擎封裝為商業 SaaS、付費 API 或進行企業內部封閉式部署的客戶設計。
-- **設定方式**：除了填入 Gemini API Key，請在下方的 `VajraClaw License Key` 欄位填入您購買的企業授權碼。
-- **運作原理**：系統驗證金鑰後，將解除所有商業使用限制 (Commercial Exemption)，並解鎖進階的企業級功能（如：API 頻率無限制、深度天台/唯識動態權重推演、叢集負載平衡等）。
-
-### 3. 極客開發者模式 (Local Proxy Mode)
+### 2. 極客開發者模式 (Local Proxy Mode)
 如果您是想自己修改 Python 核心演算法 (例如修改 `Weaver` 或 `GuardVM`) 的開發者，請使用此模式。
 - **設定方式**：開啟 `Enable Local Proxy` 選項，並將 API Endpoint 指向 `http://127.0.0.1:8080/v1`。
 - **運作原理**：所有對話與定錨請求不再由外掛直接處理，而是轉發給本機背景運行的 `gemini_proxy.py`，讓您享受 100% 的演算法修改自由度。
