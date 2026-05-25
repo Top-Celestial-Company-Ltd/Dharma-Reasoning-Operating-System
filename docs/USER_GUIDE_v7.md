@@ -32,10 +32,16 @@
 ## 🚀 快速啟動指南 (Quick Start)
 
 1. **安裝 Obsidian**: 請前往 [Obsidian 官網](https://obsidian.md/) 下載並安裝。
-2. **安裝 Python**: 確保您的 PC 已安裝 Python 3.10 以上版本，並將其加入系統 PATH。
-3. **準備 API Key**: 請至 [Google AI Studio](https://aistudio.google.com/) 申請您的 Gemini API Key，並填入系統配置中。
-4. **載入 DROS 知識庫**: 打開 Obsidian，選擇「開啟資料夾作為儲存庫」，指向本專案所在的資料夾。
-5. **啟動代理伺服器**: 雙擊執行 `start_gemini_proxy.vbs` (或在終端機執行 `python src/proxy/gemini_proxy.py`)，啟動 DROS 核心推理引擎。
+2. **安裝 Python**: 確保您的 PC 已安裝 Python 3.10 以上版本，並在安裝時勾選「Add Python to PATH」。
+3. **準備 API Key**: 請至 [Google AI Studio](https://aistudio.google.com/) 申請您的 Gemini API Key。
+4. **載入 DROS 知識庫**: 打開 Obsidian，選擇「開啟資料夾作為儲存庫 (Open folder as vault)」，指向您下載解壓縮後的本專案資料夾。
+5. **安裝與設定對話外掛 (🔑 關鍵步驟)**:
+   - 在 Obsidian 中，點擊左下角「設定 (齒輪圖示)」 -> 「第三方外掛程式 (Community plugins)」。
+   - 關閉安全模式，點擊「瀏覽 (Browse)」，搜尋並安裝 **`BMO Chatbot`** (這是最適合 DROS 的右側聊天面板外掛)，安裝後請點擊**啟用**。
+   - 進入 `BMO Chatbot` 的設定頁面，找到 API 連線設定 (REST API / OpenAI Compatible)，將 **API URL (Endpoint)** 更改為 DROS 的本地端點：`http://127.0.0.1:8080/v1/chat/completions`。
+   - 將 API Key 欄位隨意填入 `dros-local-key` (因為我們使用本地代理，實際的 Gemini Key 會交由背景伺服器處理)。
+6. **啟動 DROS 核心推理引擎 (代理伺服器)**: 在專案資料夾中，雙擊執行 `start_gemini_proxy.vbs` (Mac/Linux 用戶請在終端機執行 `python src/proxy/gemini_proxy.py`)。此程式啟動後會要求您輸入第 3 步申請的 Gemini API Key。
+7. **開始法義問答**: 回到 Obsidian，在右側面板打開 BMO Chatbot 聊天視窗。您現在已經可以與「零幻覺的數位伴讀」進行最高維度的法義對話了！
 
 > [!TIP]
 > **🏷️ 分類物理與語意解耦之安全提示 (Sectarian Taxonomy Decoupling)**
