@@ -1,12 +1,14 @@
-@echo off
-setlocal enabledelayedexpansion
-
-echo ========================================================
-echo   DROS 7.1 Nirvana Edition - Vajra Launcher v2.4
-echo   Dharma Reasoning OS - Boot Bootstrapping
-echo ========================================================
-echo.
-
+@echo off
+:: Force active code page to UTF-8
+chcp 65001 >nul 2>&1
+setlocal enabledelayedexpansion
+
+echo ========================================================
+echo   DROS 7.1 Nirvana Edition - Vajra Launcher v2.4
+echo   Dharma Reasoning OS - Boot Bootstrapping
+echo ========================================================
+echo.
+
 rem 1. Set and Detect DROS 7.0 Release Directory via 100% Pure English Relative Path
 set "DROS_DIR=..\DROS_GitHub_Release_v5.2"
 
