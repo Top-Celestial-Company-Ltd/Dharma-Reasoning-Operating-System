@@ -356,7 +356,13 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
         let maxScore = 0;
         for (const file of files) {
             const path = file.path.toLowerCase();
-            if (!path.startsWith("core/") && !path.startsWith("user_pavilion/")) {
+            // 擴展檢索範圍，包含大覺藏與佛堂內其他常用法義目錄
+            if (!path.startsWith("core/") &&
+                !path.startsWith("user_pavilion/") &&
+                !path.startsWith("vault_dajuezang/") &&
+                !path.startsWith("00_黃金索引庫/") &&
+                !path.startsWith("ai 總論/") &&
+                !path.startsWith("ai 龍樹/")) {
                 continue;
             }
             const cleanBasename = file.basename.replace(/[^\u4e00-\u9fa5\w]/g, "").toLowerCase();
@@ -385,10 +391,15 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
     };
     const readAndProcessFile = async (file, isCore) => {
         try {
+            // 全域累積容量上限看門狗，避免多個節點疊加時撐爆 token 上限
+            if (totalLen > 30000) {
+                console.log(`[!] Context Watchdog: Skip reading node due to global token budget limit (totalLen > 30000): ${file.basename}`);
+                return;
+            }
             let contentText = await app.vault.read(file);
             let data = "";
             const summaryRegex = /> \[!NOTE\] (?:核心義理|歷史精鍊).*?\n(?:> .*?\n)+/is;
-            const quoteRegex = /> \[(?:!QUOTE|!NOTE)\] (?:辭典原文|跨館開採|語義融合).*?\n(?:> .*?\n)+/is;
+            const quoteRegex = /> \[(?:!QUOTE|!NOTE)\] (?:原典引文|跨館開採|語義融合).*?\n(?:> .*?\n)+/is;
             const summaryMatch = contentText.match(summaryRegex);
             const quoteMatch = contentText.match(quoteRegex);
             if (summaryMatch || quoteMatch) {
@@ -399,6 +410,11 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
             }
             else {
                 data = contentText;
+            }
+            // 物理防污染與防溢出：單一節點最大容量看門狗 (10k 限制)
+            if (data.length > 10000) {
+                console.log(`[!] Context Watchdog: Truncating extremely large node: ${file.basename}`);
+                data = data.substring(0, 10000) + "\n... (節點內容過長，已自動折疊/截斷)\n";
             }
             if (!isCore) {
                 if (totalLen > 12000) {
@@ -1123,32 +1139,31 @@ class DrosChatView extends obsidian_1.ItemView {
         if (cleanedTitle.length > 30) {
             cleanedTitle = cleanedTitle.substring(0, 30);
         }
-        cleanedTitle = cleanedTitle.trim().replace(/[\.\s]+$/, "");
+        // 若擷取後以「請」結尾（通常是「請教」、「請開示」等問句被截斷），移除以防與後置角色後綴（如 _金剛、_菩薩）拼接突兀
+        cleanedTitle = cleanedTitle.replace(/請$/, "").trim().replace(/[\.\s]+$/, "");
         if (!cleanedTitle) {
             cleanedTitle = t.unnamed;
         }
-        // 根據當前選中的合約決定模式後綴
-        let modeSuffix = "";
+        // 根據當前選中的合約與語言決定前置角色標記 (roleTag)
+        let roleTag = "";
         if (this.currentLang === "ZH") {
-            modeSuffix = this.selectedContract === "default_vajra" ? "_金剛" : "_菩薩";
+            roleTag = this.selectedContract === "default_vajra" ? "金剛" : "菩薩";
         }
         else {
-            modeSuffix = this.selectedContract === "default_vajra" ? "_Vajra" : "_Bodhisattva";
+            roleTag = this.selectedContract === "default_vajra" ? "Vajra" : "Bodhisattva";
         }
-        // 根據語言決定是否加 EN 後綴
-        const langSuffix = this.currentLang === "EN" ? "_EN" : "";
         const folderPath = "User_Pavilion";
         try {
             const folder = this.app.vault.getAbstractFileByPath(folderPath);
             if (!folder) {
                 await this.app.vault.createFolder(folderPath);
             }
-            // 物理硬化安全化：遞增數字防止任何筆記被覆蓋
-            let fullPath = `${folderPath}/DROS-${cleanedTitle}${modeSuffix}${langSuffix}.md`;
+            // 新命名結構：DROS-角色-擷取標題
+            let fullPath = `${folderPath}/DROS-${roleTag}-${cleanedTitle}.md`;
             let existingFile = this.app.vault.getAbstractFileByPath(fullPath);
             let counter = 1;
             while (existingFile) {
-                fullPath = `${folderPath}/DROS-${cleanedTitle}${modeSuffix}${langSuffix}-${counter}.md`;
+                fullPath = `${folderPath}/DROS-${roleTag}-${cleanedTitle}-${counter}.md`;
                 existingFile = this.app.vault.getAbstractFileByPath(fullPath);
                 counter++;
             }

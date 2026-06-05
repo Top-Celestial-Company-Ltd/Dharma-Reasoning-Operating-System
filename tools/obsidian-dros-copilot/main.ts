@@ -1,4 +1,4 @@
-﻿import { Plugin, WorkspaceLeaf, ItemView, Notice, requestUrl, TFile, Setting, PluginSettingTab, App, addIcon, Platform } from 'obsidian';
+import { Plugin, WorkspaceLeaf, ItemView, Notice, requestUrl, TFile, Setting, PluginSettingTab, App, addIcon, Platform } from 'obsidian';
 
 declare const require: any;
 
@@ -370,7 +370,13 @@ async function getLocalNodeContent(app: App, coreNodes: string[], relatedNodes: 
 
         for (const file of files) {
             const path = file.path.toLowerCase();
-            if (!path.startsWith("core/") && !path.startsWith("user_pavilion/")) {
+            // 擴展檢索範圍，包含大覺藏與佛堂內其他常用法義目錄
+            if (!path.startsWith("core/") && 
+                !path.startsWith("user_pavilion/") &&
+                !path.startsWith("vault_dajuezang/") &&
+                !path.startsWith("00_黃金索引庫/") &&
+                !path.startsWith("ai 總論/") &&
+                !path.startsWith("ai 龍樹/")) {
                 continue;
             }
 
@@ -406,6 +412,11 @@ async function getLocalNodeContent(app: App, coreNodes: string[], relatedNodes: 
 
     const readAndProcessFile = async (file: TFile, isCore: boolean) => {
         try {
+            // 全域累積容量上限看門狗，避免多個節點疊加時撐爆 token 上限
+            if (totalLen > 30000) {
+                console.log(`[!] Context Watchdog: Skip reading node due to global token budget limit (totalLen > 30000): ${file.basename}`);
+                return;
+            }
             let contentText = await app.vault.read(file);
             let data = "";
 
@@ -420,6 +431,12 @@ async function getLocalNodeContent(app: App, coreNodes: string[], relatedNodes: 
                 if (quoteMatch) data += quoteMatch[0] + "\n";
             } else {
                 data = contentText;
+            }
+
+            // 物理防污染與防溢出：單一節點最大容量看門狗 (10k 限制)
+            if (data.length > 10000) {
+                console.log(`[!] Context Watchdog: Truncating extremely large node: ${file.basename}`);
+                data = data.substring(0, 10000) + "\n... (節點內容過長，已自動折疊/截斷)\n";
             }
 
             if (!isCore) {

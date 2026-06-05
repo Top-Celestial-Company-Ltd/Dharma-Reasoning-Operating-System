@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const obsidian_1 = require("obsidian");
 const VIEW_TYPE_DROS_CHAT = "dros-chat-view";
@@ -65,7 +65,7 @@ const LOCALIZATION = {
             sopTitle: "💡 極簡操作 SOP",
             sopSteps: [
                 "<strong>精準法義對話</strong>：在伴學對話框中發問，AI 將檢索召回原典義理並進行零幻覺深度解答。",
-                "<strong>推理契約切換</strong>：面板頂部可隨時切換 <strong>金剛 (嚴謹客觀)</strong> 與 <strong>菩薩 (統攝圓融)</strong> 雙軌合約。<br>💡 <em>善男信女、初親近佛法者，建議選用「<strong>🌊 菩薩模式</strong>」，語調親切、善用譬喻，如善知識循循善誘；佛學義理深究者，建議選用「<strong>📿 金剛模式</strong>」，嚴守原典座標，拒絕主觀詮釋。</em>",
+                "<strong>推理契約切換</strong>：面板頂部可隨時切換 <strong>金剛 (嚴謹客觀)</strong> 與 <strong>菩薩 (統攝圓融)</strong> 雙軌合約。",
                 "<strong>筆記智慧關聯</strong>：點擊 <code>📎 連結當前編輯筆記</code>，即可無縫引入當前編輯筆記的內容作為對話上下文。",
                 "<strong>一鍵儲存館藏</strong>：點擊 AI 回應下方的 <code>💾 存入館藏</code>，將對話紀錄自動以模式後綴防覆蓋格式存入 <code>User_Pavilion</code> 筆記庫。"
             ],
@@ -187,7 +187,7 @@ const LOCALIZATION = {
             sopTitle: "💡 Quick Operation SOP",
             sopSteps: [
                 "<strong>Precise Dialogue</strong>: Ask questions in the chat panel, and the AI will retrieve canonical texts and provide high-fidelity answers.",
-                "<strong>Contract Switch</strong>: Easily switch between the <strong>Vajra (Strict/Canonical)</strong> and <strong>Bodhisattva (Modern/Interpretive)</strong> contracts at the top.<br>💡 <em>Lay practitioners and those new to Buddhism are recommended to use <strong>🌊 Bodhisattva Mode</strong> — warm, approachable, and rich in analogies. Scholars and advanced practitioners are recommended to use <strong>📿 Vajra Mode</strong> — strictly anchored to canonical coordinates, free from subjective interpretation.</em>",
+                "<strong>Contract Switch</strong>: Easily switch between the <strong>Vajra (Strict/Canonical)</strong> and <strong>Bodhisattva (Modern/Interpretive)</strong> contracts at the top.",
                 "<strong>Note Integration</strong>: Click <code>📎 Link Active Note</code> to seamlessly include your active note as conversational context.",
                 "<strong>Archive to Pavilion</strong>: Click <code>💾 Archive to Pavilion</code> below the response to automatically save chat history to the <code>User_Pavilion</code> folder."
             ],
@@ -356,7 +356,13 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
         let maxScore = 0;
         for (const file of files) {
             const path = file.path.toLowerCase();
-            if (!path.startsWith("core/") && !path.startsWith("user_pavilion/")) {
+            // 擴展檢索範圍，包含大覺藏與佛堂內其他常用法義目錄
+            if (!path.startsWith("core/") &&
+                !path.startsWith("user_pavilion/") &&
+                !path.startsWith("vault_dajuezang/") &&
+                !path.startsWith("00_黃金索引庫/") &&
+                !path.startsWith("ai 總論/") &&
+                !path.startsWith("ai 龍樹/")) {
                 continue;
             }
             const cleanBasename = file.basename.replace(/[^\u4e00-\u9fa5\w]/g, "").toLowerCase();
@@ -385,6 +391,11 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
     };
     const readAndProcessFile = async (file, isCore) => {
         try {
+            // 全域累積容量上限看門狗，避免多個節點疊加時撐爆 token 上限
+            if (totalLen > 30000) {
+                console.log(`[!] Context Watchdog: Skip reading node due to global token budget limit (totalLen > 30000): ${file.basename}`);
+                return;
+            }
             let contentText = await app.vault.read(file);
             let data = "";
             const summaryRegex = /> \[!NOTE\] (?:核心義理|歷史精鍊).*?\n(?:> .*?\n)+/is;
@@ -399,6 +410,11 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
             }
             else {
                 data = contentText;
+            }
+            // 物理防污染與防溢出：單一節點最大容量看門狗 (10k 限制)
+            if (data.length > 10000) {
+                console.log(`[!] Context Watchdog: Truncating extremely large node: ${file.basename}`);
+                data = data.substring(0, 10000) + "\n... (節點內容過長，已自動折疊/截斷)\n";
             }
             if (!isCore) {
                 if (totalLen > 12000) {
@@ -851,10 +867,6 @@ class DrosChatView extends obsidian_1.ItemView {
         this.currentLang = "ZH";
         this.chatHistory = [];
         this.plugin = plugin;
-        // 取消機制狀態
-        this._cancelled = false;
-        this._isQuerying = false;
-        this._sendBtn = null;
     }
     getViewType() { return VIEW_TYPE_DROS_CHAT; }
     getDisplayText() { return "DROS Copilot"; }
@@ -961,25 +973,17 @@ class DrosChatView extends obsidian_1.ItemView {
             text: t.send,
             cls: "dros-send-btn"
         });
-        this._sendBtn = sendBtn;
         const clearBtn = inputArea.createEl("button", {
             text: "🧹",
             cls: "dros-clear-btn"
         });
-        // 發送按鈕點擊事件（兼任取消按鍵）
-        sendBtn.addEventListener("click", () => {
-            if (this._isQuerying) {
-                // 取消模式：標記取消，UI 立即還原
-                this._cancelled = true;
-            } else {
-                this.handleSend();
-            }
-        });
-        // 鍵盤 Enter 發送（查詢中禁用）
+        // 發送按鈕點擊事件
+        sendBtn.addEventListener("click", () => this.handleSend());
+        // 鍵盤 Ctrl + Enter / Enter 發送
         this.inputEl.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                if (!this._isQuerying) this.handleSend();
+                this.handleSend();
             }
         });
         // 清除對話
@@ -1022,26 +1026,11 @@ class DrosChatView extends obsidian_1.ItemView {
         const isWelcome = this.chatHistory.length === 1 && (text === LOCALIZATION.ZH.welcome || text === LOCALIZATION.EN.welcome);
         return this.appendMessageEl(sender, text, isWelcome);
     }
-    _setQueryingState(isQuerying) {
-        this._isQuerying = isQuerying;
-        const t = LOCALIZATION[this.currentLang];
-        if (this._sendBtn) {
-            if (isQuerying) {
-                this._sendBtn.setText(this.currentLang === "ZH" ? "⏹ 取消" : "⏹ Cancel");
-                this._sendBtn.addClass("dros-cancel-mode");
-            } else {
-                this._sendBtn.setText(t.send);
-                this._sendBtn.removeClass("dros-cancel-mode");
-            }
-        }
-    }
     async handleSend() {
         let query = this.inputEl.value.trim();
-        if (!query || this._isQuerying)
+        if (!query)
             return;
         const t = LOCALIZATION[this.currentLang];
-        this._cancelled = false;
-        this._setQueryingState(true);
         this.inputEl.value = "";
         this.appendMessage("user", query);
         this.lastUserQuery = query;
@@ -1123,13 +1112,6 @@ class DrosChatView extends obsidian_1.ItemView {
         }
         try {
             const reply = await queryDrosEngine(query, this.selectedContract, customPromptContent, this.currentLang, this.app, this.plugin.settings);
-            // 若使用者已取消，靜默丟棄結果
-            if (this._cancelled) {
-                loadingBubble.remove();
-                this.chatHistory.pop();
-                this._setQueryingState(false);
-                return;
-            }
             loadingBubble.removeClass("shimmering");
             loadingBubble.querySelector(".content").setText(reply);
             // 同步更新記憶體中的 assistant 回應
@@ -1139,13 +1121,6 @@ class DrosChatView extends obsidian_1.ItemView {
             this.messageListEl.scrollTop = this.messageListEl.scrollHeight;
         }
         catch (err) {
-            // 若使用者已取消，靜默忽略錯誤
-            if (this._cancelled) {
-                loadingBubble.remove();
-                this.chatHistory.pop();
-                this._setQueryingState(false);
-                return;
-            }
             loadingBubble.removeClass("shimmering");
             let errText = err.message || t.connError;
             if (this.plugin.settings.engineMode === "proxy") {
@@ -1153,9 +1128,6 @@ class DrosChatView extends obsidian_1.ItemView {
             }
             loadingBubble.querySelector(".content").setText(errText);
             this.chatHistory[this.chatHistory.length - 1].text = errText;
-        }
-        finally {
-            this._setQueryingState(false);
         }
     }
     async saveAsPavilionNote(query, replyText) {
