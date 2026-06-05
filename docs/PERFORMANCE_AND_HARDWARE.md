@@ -1,6 +1,6 @@
 # ⚙️ DROS 運行效能與硬體需求白皮書 (Performance & Hardware Guide)
 
-歡迎來到 DROS (Dharma Reasoning OS) 運行效能與硬體配置指南！本文件旨在幫助使用者徹底消除對「運行速度」與「電腦配備」的疑慮，並提供最實用的優化加速指南。
+歡迎來到 DROS (Deterministic Runtime OS) 運行效能與硬體配置指南！本文件旨在幫助使用者徹底消除對「運行速度」與「電腦配備」的疑慮，並提供最實用的優化加速指南。
 
 ---
 
@@ -58,4 +58,4 @@ DROS 在設計之初，就秉持著「不增加使用者本地硬體負擔」的
 * **Bodhisattva (菩薩模式)**：允許隨流聯想與現代詮釋，生成字數較多，適合在安靜的時間進行深入探討。
 
 ---
-*Dharma Reasoning OS v7.2 — 輕量智慧，法音隨流。*
+*Deterministic Runtime OS v7.2 — 輕量智慧，法音隨流。*

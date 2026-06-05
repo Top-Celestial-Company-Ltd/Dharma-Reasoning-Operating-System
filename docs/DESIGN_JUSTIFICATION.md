@@ -7,7 +7,7 @@
 
 在現代 AI 開發領域，有時多數工程師迫於現實而拼湊龐大的技術棧（Django/Spring Boot + PostgreSQL + Chroma 向量資料庫 + Redis 快取 + Docker 容器），建構出重達數 GB、動輒因連接爆開或資料損壞而崩潰的臃腫 RAG 系統。
 
-DROS (Dharma Reasoning OS) 7.2 採取了完全相反的降維打擊策略 ── **「無資料庫（Serverless Flat-File）與語義 OS 物理映射」**。本白皮書旨在從現代計算機科學、物理 I/O、併發安全與軟體維運生命週期等多維度，論證本架構的相對優越性。
+DROS (Deterministic Runtime OS) 7.2 採取了完全相反的降維打擊策略 ── **「無資料庫（Serverless Flat-File）與語義 OS 物理映射」**。本白皮書旨在從現代計算機科學、物理 I/O、併發安全與軟體維運生命週期等多維度，論證本架構的相對優越性。
 
 ---
 

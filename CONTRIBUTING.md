@@ -1,7 +1,7 @@
 # DROS 貢獻者指南與授權協議 (Contributor Guidelines & CLA)
 
 > [!IMPORTANT]
-> 感謝您對 **DROS 7.1 (Dharma Reasoning OS) 認識論感知作業系統** 的關注！
+> 感謝您對 **DROS 7.1 (Deterministic Runtime OS) 認識論感知作業系統** 的關注！
 > 為了維護本專案的法理主權、保障數據的純淨度，並確保未來的雙軌商轉與利他發行戰略，所有提交 Pull Request (PR) 的貢獻者，均視為自動同意以下 **貢獻者授權協議 (Contributor License Agreement, CLA)**。
 
 ---
@@ -31,4 +31,4 @@
 > 一旦您向 DROS 任何分支提交 PR 或 Issue 合併申請，即視為本貢獻者授權協議（CLA）已依法即時成立並生效。
 
 ---
-*Dharma Reasoning OS v7.1 — 法理硬化，自利利他。*
+*Deterministic Runtime OS v7.1 — 法理硬化，自利利他。*

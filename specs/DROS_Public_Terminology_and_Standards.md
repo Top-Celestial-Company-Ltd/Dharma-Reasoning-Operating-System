@@ -8,7 +8,7 @@
 
 ## 🏛 1. Purpose of this Document
 
-In the absence of traditional software patents, the **Dharma Reasoning Operating System (DROS)** relies heavily on strict architectural standards, defined terminology, and open-source licensing (AGPL-3.0) to maintain its intellectual property boundaries.
+In the absence of traditional software patents, the **Deterministic Runtime Operating System (DROS)** relies heavily on strict architectural standards, defined terminology, and open-source licensing (AGPL-3.0) to maintain its intellectual property boundaries.
 
 This document serves as the **Official Lexicon and Standard** for the DROS ecosystem. Any third-party system, commercial platform, or academic research paper that utilizes these specific architectural concepts, data pipelines, or terminologies in the context of Large Language Model (LLM) reasoning engines is recognized as a derivative work of DROS and MUST comply with the underlying Open Source and Commercial licenses.
 

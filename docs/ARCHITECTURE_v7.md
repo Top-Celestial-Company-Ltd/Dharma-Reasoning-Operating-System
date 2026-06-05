@@ -1,10 +1,10 @@
-# 🏯 DROS 7.2.0: Dharma Reasoning Operating System (Epistemic Edition)
+# 🏯 DROS 7.2.0: Deterministic Runtime Operating System (Epistemic Edition)
 
 ## 數位佛堂：認識論感知與多層級推理作業系統架構白皮書
 
 > **"DROS is not an operating system for data — it is an operating system for constrained reasoning trajectories over canonical doctrinal space."**
 
-DROS (Dharma Reasoning Operating System) 不是傳統的問答機器人，也不是大雜燴式的 RAG 系統。它是一個**「受認識論與法義結構約束的推理作業系統」**，核心目標是為 AI 本地應用提供具備物理安全性的語義內核。
+DROS (Deterministic Runtime Operating System) 不是傳統的問答機器人，也不是大雜燴式的 RAG 系統。它是一個**「受認識論與法義結構約束的推理作業系統」**，核心目標是為 AI 本地應用提供具備物理安全性的語義內核。
 
 在 DROS 的世界觀中，大語言模型 (LLM) 被剝奪了自主檢索與發散推理的自由，被降級為系統的「算術邏輯單元 (ALU)」。系統通過外部的編譯器與虛擬機，將複雜的法義與宗派戒律轉化為確定性的執行圖，達成高精度、低算力、零幻覺的工業級表現。
 

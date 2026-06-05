@@ -2,7 +2,11 @@
 
 <img src="dros_logo.svg" width="300" alt="DROS Logo">
 
+# ☸️ Deterministic Runtime OS (DROS) v7.2.0
+
 **The Thinnest OS Kernel in the World, Powering the Thickest Philosophical Reasoning.**
+
+**DROS-RFC-001: Multi-Language Micro-Kernel Reference Implementation & Parity Verification**
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![Official Website](https://img.shields.io/badge/Official-dr--os.io-gold.svg)](https://dr-os.io)

@@ -5,7 +5,7 @@
 > **"Every architectural decision is a series of trade-offs. Knowing where your system breaks is the ultimate signature of a senior software architect."**  
 > ── 康宸園有限公司/Jimmy Chen
 
-在現代軟體工程中，沒有任何一種架構是完美的「萬靈丹（Silver Bullet）」。DROS (Dharma Reasoning OS) 7.2 採取了完全相反的降維打擊策略 ── **「無資料庫（Serverless Flat-File）與語義記憶體映射」**。
+在現代軟體工程中，沒有任何一種架構是完美的「萬靈丹（Silver Bullet）」。DROS (Deterministic Runtime OS) 7.2 採取了完全相反的降維打擊策略 ── **「無資料庫（Serverless Flat-File）與語義記憶體映射」**。
 
 本白皮書旨在從現代計算機科學、物理 I/O、併發安全與軟體維運生命週期等多維度，冷酷剖析本系統的設計極限，呈現主流資料庫領域可能提出的技術批判，並給出 DROS 的戰略防禦防線。
 

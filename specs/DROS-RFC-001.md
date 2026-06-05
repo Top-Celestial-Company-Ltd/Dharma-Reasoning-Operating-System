@@ -1,7 +1,7 @@
 # DROS-RFC-001: The Kernel Protocol & Schema
 ```text
 Document Status: Standards Track
-Authors: Jimmy Chen (Kang Chen Yuan Ltd.), Antigravity AI
+Authors: Jimmy Chen (Top-Celestial Company Ltd.), Antigravity AI
 Date: May 19, 2026
 Version: 7.1.0
 ```
@@ -10,7 +10,7 @@ Version: 7.1.0
 
 ## Abstract
 
-This document defines the core data schema and mapping specifications for the Dharma Reasoning OS (DROS). DROS is a semantic runtime constraint system designed to govern Large Language Models (LLMs) during high-fidelity philosophical and doctrinal reasoning. This specification formalizes the topological representation of semantic nodes, directional synaptic links, and the cryptographic validation format for the Golden Manifest (`dros_golden_manifest.json`), ensuring absolute cross-language parity.
+This document defines the core data schema and mapping specifications for the Deterministic Runtime OS (DROS). DROS is a semantic runtime constraint system designed to govern Large Language Models (LLMs) during high-fidelity philosophical and doctrinal reasoning. This specification formalizes the topological representation of semantic nodes, directional synaptic links, and the cryptographic validation format for the Golden Manifest (`dros_golden_manifest.json`), ensuring absolute cross-language parity.
 
 ---
 

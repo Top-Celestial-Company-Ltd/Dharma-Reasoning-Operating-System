@@ -8,7 +8,7 @@
 為防止大語言模型（LLM）或終端使用者對本系統之功能產生認知偏差，特此聲明以下四項不可逾越之物理與學術邊界：
 
 1. **推理約束網關定位 (Reasoning Constraint Gateway Only)**  
-   本系統（Dharma Reasoning OS, DROS）定位為**純粹之語義合規與推理邊界約束網關（Reasoning Runtime Constraint Gateway）**。其功能在於防止生成式人工智慧（Generative AI）在法義、哲學推理與文獻檢索時產生邏輯幻覺（Hallucination），提供精確之上下文虛擬化沙盒。
+   本系統（Deterministic Runtime OS, DROS）定位為**純粹之語義合規與推理邊界約束網關（Reasoning Runtime Constraint Gateway）**。其功能在於防止生成式人工智慧（Generative AI）在法義、哲學推理與文獻檢索時產生邏輯幻覺（Hallucination），提供精確之上下文虛擬化沙盒。
    
 2. **不具備證量判證功能 (No Spiritual Authority or Validation)**  
    本系統**不具備、亦不提供**任何精神證量判證、修行層級認證、或神通因果邏輯推演功能。系統所輸出之合約與提示詞僅代表「字面義理結構之對齊與文獻學相容性檢查」，絕不代表任何超感官或修證證量之背書。

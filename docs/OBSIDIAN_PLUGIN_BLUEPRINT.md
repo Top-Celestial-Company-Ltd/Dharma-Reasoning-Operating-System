@@ -28,7 +28,7 @@ dros-copilot/
   "name": "DROS Doctrinal Copilot",
   "version": "1.0.0",
   "minAppVersion": "1.0.0",
-  "description": "Dharma Reasoning OS 隨身伴學與義理定錨 Copilot。提供金剛/菩薩雙軌合約推理、一鍵神經突觸雙向編織與義理卡片定錨。",
+  "description": "Deterministic Runtime OS 隨身伴學與義理定錨 Copilot。提供金剛/菩薩雙軌合約推理、一鍵神經突觸雙向編織與義理卡片定錨。",
   "author": "康宸園有限公司/Jimmy Chen",
   "authorUrl": "https://github.com/JimmyChen-KC",
   "isDesktopOnly": false

@@ -1,6 +1,6 @@
 # DROS 7.0 Nirvana Edition Dual-Licensing Agreement
 
-DROS (Dharma Reasoning OS) operates under a strategic **"Strong Copyleft Engine, Proprietary Assets"** dual-licensing model to protect high-value assets and ensure open-source cooperation.
+DROS (Deterministic Runtime OS) operates under a strategic **"Strong Copyleft Engine, Proprietary Assets"** dual-licensing model to protect high-value assets and ensure open-source cooperation.
 
 ---
 

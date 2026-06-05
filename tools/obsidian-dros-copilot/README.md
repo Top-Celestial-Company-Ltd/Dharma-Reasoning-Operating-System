@@ -3,7 +3,7 @@
 > **「中文經典背景檢索，高精學術英文合成輸出。」**  
 > **"Chinese Canonical Retrieval, Academic English Synthesis."**
 
-DROS Doctrinal Copilot 是為 DROS (Dharma Reasoning OS) 系統量身打造的 Obsidian 官方整合介面，實現高效且高準確性的經典伴學、義理檢索與筆記同步。
+DROS Doctrinal Copilot 是為 DROS (Deterministic Runtime OS) 系統量身打造的 Obsidian 官方整合介面，實現高效且高準確性的經典伴學、義理檢索與筆記同步。
 
 ---
 ## 📥 安裝步驟 | Installation Steps

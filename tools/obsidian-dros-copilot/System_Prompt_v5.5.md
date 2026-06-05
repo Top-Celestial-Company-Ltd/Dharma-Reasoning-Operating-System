@@ -40,4 +40,4 @@
 - 保持學術誠實：有依據則精準闡述，無充分依據則誠實說明。
 
 ---
-*Dharma Reasoning OS v7.2 — 金剛治學，菩薩度眾，理事無礙。*
+*Deterministic Runtime OS v7.2 — 金剛治學，菩薩度眾，理事無礙。*
