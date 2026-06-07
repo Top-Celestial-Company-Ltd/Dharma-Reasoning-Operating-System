@@ -1,4 +1,4 @@
-# DROS-RFC-001: Dharma Reasoning Operating System Architecture Specification
+# DROS-RFC-001: Deterministic Runtime Operating System Architecture Specification
 
 **Status:** Final / Active  
 **Version:** 1.0.0  
@@ -9,7 +9,7 @@
 
 ## 1. Abstract
 
-The Dharma Reasoning Operating System (DROS) introduces a paradigm shift in Large Language Model (LLM) governance. Current industry standards attempt to control LLM outputs using probabilistic methods—such as Prompt Engineering, Retrieval-Augmented Generation (RAG), or secondary "LLM-as-a-Judge" filters. These approaches are fundamentally flawed because they rely on the same unpredictable neural architecture to police itself, leading to infinite regress, high latency, and inevitable edge-case failures (Hallucinations and Prompt Injections).
+The Deterministic Runtime Operating System (DROS) introduces a paradigm shift in Large Language Model (LLM) governance. Current industry standards attempt to control LLM outputs using probabilistic methods—such as Prompt Engineering, Retrieval-Augmented Generation (RAG), or secondary "LLM-as-a-Judge" filters. These approaches are fundamentally flawed because they rely on the same unpredictable neural architecture to police itself, leading to infinite regress, high latency, and inevitable edge-case failures (Hallucinations and Prompt Injections).
 
 **DROS-RFC-001** defines a deterministic, physics-inspired **Microkernel Architecture** for AI. By treating the LLM as a highly capable but inherently unreliable "Coprocessor", DROS wraps it in a memory-safe, hardcoded **GuardVM** and enforces absolute boundaries using **Vajra Contracts** (Markdown/YAML defined rulesets). When boundaries are crossed, DROS does not "argue" with the LLM; it executes a physical-layer circuit break (Fuse Blow), guaranteeing zero-hallucination compliance.
 

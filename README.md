@@ -19,7 +19,7 @@
 
 ## 📌 What is DROS?
 
-**Dharma Reasoning Operating System (DROS)** is the world's first AI runtime engine built on a **Microkernel + Physical File Discipline** architecture. 
+**Deterministic Runtime Operating System (DROS)** is the world's first AI runtime engine built on a **Microkernel + Physical File Discipline** architecture. 
 
 It fundamentally solves the three biggest pain points of Enterprise AI Agents:
 1. **Hallucinations** (Unpredictable logic failures)

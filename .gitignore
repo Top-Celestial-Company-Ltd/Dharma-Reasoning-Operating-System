@@ -36,11 +36,12 @@ $RECYCLE.BIN/
 *.sln
 *.swp
 
-# Obsidian local configurations (excluding templates)
+# Obsidian local configurations & SENSITIVE KEYS
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/backups/
 .obsidian/plugins/hotkeys.json
+.obsidian/plugins/*/data.json
 
 # Exclude obsolete historical documents from GitHub uploads
 docs/archive/
