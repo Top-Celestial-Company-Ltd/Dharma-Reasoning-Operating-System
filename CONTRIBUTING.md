@@ -1,5 +1,7 @@
 # DROS 貢獻者指南與授權協議 (Contributor Guidelines & CLA)
 
+[繁體中文](CONTRIBUTING.md) | [English](CONTRIBUTING_en.md)
+
 > [!IMPORTANT]
 > 感謝您對 **DROS 7.1 (Deterministic Runtime OS) 認識論感知作業系統** 的關注！
 > 為了維護本專案的法理主權、保障數據的純淨度，並確保未來的雙軌商轉與利他發行戰略，所有提交 Pull Request (PR) 的貢獻者，均視為自動同意以下 **貢獻者授權協議 (Contributor License Agreement, CLA)**。

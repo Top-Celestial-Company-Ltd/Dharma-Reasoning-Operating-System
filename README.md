@@ -2,7 +2,9 @@
 
 <img src="dros_logo.svg" width="300" alt="DROS Logo">
 
-# ☸️ Deterministic Runtime OS (DROS) v7.2.0
+# ☸️ Deterministic Runtime OS (DROS) v7.3
+
+[繁體中文](README_zh.md) | [English](README.md)
 
 **The Thinnest OS Kernel in the World, Powering the Thickest Philosophical Reasoning.**
 

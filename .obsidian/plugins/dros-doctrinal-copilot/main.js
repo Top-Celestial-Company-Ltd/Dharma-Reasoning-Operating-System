@@ -159,11 +159,11 @@ const LOCALIZATION = {
         saveNoteError: "❌ Failed to save note: ",
         linkNoticeSuccess: "📎 Active note content linked to AI context!",
         linkNoticeCancel: "📎 Unlinked active note context",
-        connError: "❌ Failed to connect to DROS. Please double-click 'DROS金剛注射器.bat' to launch the Quart API (Port 5000)!",
+        connError: "❌ Failed to connect to DROS. Please double-click 'run_vajra_injector.bat' to launch the Quart API (Port 5000)!",
         noticeSelectText: "Please select a doctrinal term to anchor first!",
         noticeRequesting: "🔍 Requesting anchoring from DROS: ",
         noticeAnchorSuccess: "[DROS Doctrinal Anchoring Succeeded]",
-        noticeNoBackend: "❌ DROS backend is offline, please run 'DROS金剛注射器.bat'!",
+        noticeNoBackend: "❌ DROS backend is offline, please run 'run_vajra_injector.bat'!",
         unnamed: "Unnamed Concept",
         anchorRecord: "DROS Doctrinal Anchor Record",
         coreDoctrinal: "Core Doctrine",
@@ -181,7 +181,7 @@ const LOCALIZATION = {
             installTitle: "📥 Simple 3-Step Installation",
             installSteps: [
                 "<strong>Enable Plugin</strong>: Go to <code>Settings</code> -> <code>Community Plugins</code>, find <strong>DROS Doctrinal Copilot</strong> and enable it.",
-                "<strong>Start Local Backend</strong>: Go to the project root directory and double-click <code>DROS金剛注射器.bat</code> to start the local backend service (not needed for Gemini direct mode).",
+                "<strong>Start Local Backend</strong>: Go to the project root directory and double-click <code>run_vajra_injector.bat</code> to start the local backend service (not needed for Gemini direct mode).",
                 "<strong>Open Copilot Panel</strong>: Click the <strong>🪷 Dharma Chakra Icon</strong> in the left ribbon to expand the chat panel on the right!"
             ],
             sopTitle: "💡 Quick Operation SOP",
@@ -397,6 +397,30 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
                 return;
             }
             let contentText = await app.vault.read(file);
+
+            // 🚨 DROS 7.3 核心升級：若節點為「虛空指針」，動態解析 t_coordinates 並從大覺藏中召回經文
+            if (contentText.includes('node_type: "Void Pointer"') || contentText.includes('node_type: Void Pointer')) {
+                const coordMatch = contentText.match(/t_coordinates:\s*\[(.*?)\]/);
+                if (coordMatch) {
+                    const tList = coordMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''));
+                    const allFiles = app.vault.getMarkdownFiles();
+                    for (const tNum of tList) {
+                        if (!tNum) continue;
+                        const matchedFile = allFiles.find(f => f.name.startsWith(tNum) && f.path.toLowerCase().includes("vault_dajuezang/"));
+                        if (matchedFile) {
+                            let vContent = await app.vault.read(matchedFile);
+                            let truncV = vContent.substring(0, 6000);
+                            if (vContent.length > 6000) {
+                                truncV += "\n... (以下經文長度超限，已自動折疊) ...\n";
+                            }
+                            context += `\n--- 經文載入: ${matchedFile.basename} (${tNum}) ---\n${truncV}\n`;
+                            totalLen += truncV.length;
+                        }
+                    }
+                }
+                return;
+            }
+
             let data = "";
             const summaryRegex = /> \[!NOTE\] (?:核心義理|歷史精鍊).*?\n(?:> .*?\n)+/is;
             const quoteRegex = /> \[(?:!QUOTE|!NOTE)\] (?:原典引文|跨館開採|語義融合).*?\n(?:> .*?\n)+/is;

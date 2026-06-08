@@ -1,4 +1,4 @@
-# 📜 DROS 7.2 Nirvana Edition - 系統清單 (System Manifest)
+# 📜 DROS 7.0 Nirvana Edition - 系統清單 (System Manifest)
 > 產出時間: 2026-05-18 20:25
 > 系統狀態: **LOCKED / NIRVANA**
 

@@ -1,4 +1,4 @@
-﻿import os
+import os
 import re
 import asyncio
 import json
@@ -11,12 +11,20 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 # 自動偵測與動態解析專案根目錄，並強勢注入 sys.path 以防 ModuleNotFoundError
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPT_DIR)
+
 if os.path.exists(os.path.join(SCRIPT_DIR, "core")):
     VAULT_ROOT = SCRIPT_DIR
+elif os.path.exists(os.path.join(PARENT_DIR, "core")):
+    VAULT_ROOT = PARENT_DIR
 else:
     VAULT_ROOT = os.path.join(SCRIPT_DIR, "數位佛堂")
     if not os.path.exists(VAULT_ROOT):
-        VAULT_ROOT = SCRIPT_DIR
+        parent_shuitang = os.path.join(PARENT_DIR, "數位佛堂")
+        if os.path.exists(parent_shuitang):
+            VAULT_ROOT = parent_shuitang
+        else:
+            VAULT_ROOT = SCRIPT_DIR
 
 if VAULT_ROOT not in sys.path:
     sys.path.insert(0, VAULT_ROOT)
@@ -58,8 +66,8 @@ def get_graphify_retriever():
             print(f"  [!] 初始化 GraphifyRetriever 失敗: {e}")
     return _retriever_instance
 
-async def get_node_content_async(core_nodes, related_nodes=[]):
-    """從本機庫提取 Markdown 內容 (含 Token Watchdog 降維機制，整合 Graphify v2.5)"""
+async def get_node_content_async(core_nodes, related_nodes=[], sectarian_context="通用", query=""):
+    """從本機庫提取 Markdown 內容 (含 Token Watchdog 降維機制，整合 Graphify v2.7)"""
     context = ""
     total_len = 0
     
@@ -85,11 +93,11 @@ async def get_node_content_async(core_nodes, related_nodes=[]):
                         paths_to_check.append(os.path.join(root, f"{name}.md"))
                         break
                         
-        # 3. 🚨 DROS 7.2 核心升級：若前兩者均找不到，啟動 Graphify v2.5 進行語義與倒排精準模糊匹配！
+        # 3. 🚨 DROS 7.3 核心升級：若前兩者均找不到，啟動 Graphify v2.5 進行語義與倒排精準模糊匹配！
         if not paths_to_check:
             r = get_graphify_retriever()
             if r:
-                fuzzy_results = r.search(name, top_k=1, min_score=6.0)
+                fuzzy_results = r.search(name, top_k=1, min_score=6.0, sectarian_context=sectarian_context)
                 if fuzzy_results:
                     matched = fuzzy_results[0]
                     matched_path = matched["path"]
@@ -103,9 +111,44 @@ async def get_node_content_async(core_nodes, related_nodes=[]):
                     with open(path, 'r', encoding='utf-8') as f:
                         content_text = f.read()
                         
+                        # 🚨 DROS 7.3 核心升級：若節點為「虛空指針」，動態解析 t_coordinates 並從大覺藏中召回經文
+                        if "node_type: \"Void Pointer\"" in content_text or "node_type: Void Pointer" in content_text:
+                            coords = re.findall(r't_coordinates:\s*\[(.*?)\]', content_text)
+                            if coords:
+                                t_list = [t.strip().strip('"').strip("'") for t in coords[0].split(',')]
+                                vault_paths_to_try = [
+                                    os.path.join(VAULT_ROOT, "Vault_DajueZang"),
+                                    os.path.join(PARENT_DIR, "Vault_DajueZang"),
+                                    os.path.join(PARENT_DIR, "數位佛堂", "Vault_DajueZang"),
+                                    os.path.join(os.path.dirname(PARENT_DIR), "數位佛堂", "Vault_DajueZang"),
+                                ]
+                                vault_path = None
+                                for vp in vault_paths_to_try:
+                                    if os.path.exists(vp):
+                                        vault_path = vp
+                                        break
+                                if vault_path:
+                                    for t_num in t_list:
+                                        if not t_num: continue
+                                        for v_root, v_dirs, v_files in os.walk(vault_path):
+                                            for vf in v_files:
+                                                if vf.startswith(t_num) and vf.endswith(".md"):
+                                                    vf_path = os.path.join(v_root, vf)
+                                                    try:
+                                                        with open(vf_path, 'r', encoding='utf-8') as f_v:
+                                                            v_content = f_v.read()
+                                                            trunc_content = v_content[:6000]
+                                                            if len(v_content) > 6000:
+                                                                trunc_content += "\n... (以下經文長度超限，已自動折疊) ...\n"
+                                                            context += f"\n--- 經文載入: {vf} ({t_num}) ---\n{trunc_content}\n"
+                                                            total_len += len(trunc_content)
+                                                    except Exception as e_v:
+                                                        print(f"  [!] 讀取大覺藏經文 {vf} 失敗: {e_v}")
+                            return True
+
                         # DROS 7.0 升級：利用結構化標籤提取精華，減少 Token 消耗
                         summary_match = re.search(r"> \[!NOTE\] (?:核心義理|歷史精鍊).*?\n(?:> .*?\n)+", content_text, re.S)
-                        quote_match = re.search(r"> \[(?:!QUOTE|!NOTE)\] (?:原典引文|跨館開採|語義融合).*?\n(?:> .*?\n)+", content_text, re.S)
+                        quote_match = re.search(r"> \[(?:!QUOTE|!NOTE)\] (?:辭典原文|跨館開採|語義融合).*?\n(?:> .*?\n)+", content_text, re.S)
                         
                         if summary_match or quote_match:
                             data = ""
@@ -140,20 +183,21 @@ async def get_node_content_async(core_nodes, related_nodes=[]):
             
     return context
 
-async def call_gemini_stream(prompt, model, temperature=None):
+async def call_gemini_stream(prompt, model, temperature=None, api_key=None):
     """核心：全面升級為原生 Google Generative AI SDK 直連模式，完美流式輸出且無任何緩衝與解析問題"""
     import google.generativeai as genai
     import os
 
-    api_key = os.environ.get("GOOGLE_API_KEY")
     if not api_key:
-        # 嘗試從 Windows 登錄檔讀取以防 IDE 背景環境變數未載入
-        import winreg
-        try:
-            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Environment")
-            api_key, _ = winreg.QueryValueEx(key, "GOOGLE_API_KEY")
-        except:
-            pass
+        api_key = os.environ.get("GOOGLE_API_KEY")
+        if not api_key:
+            # 嘗試從 Windows 登錄檔讀取以防 IDE 背景環境變數未載入
+            import winreg
+            try:
+                key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Environment")
+                api_key, _ = winreg.QueryValueEx(key, "GOOGLE_API_KEY")
+            except:
+                pass
 
     if not api_key:
         print("    [!] 嚴重錯誤：找不到 GOOGLE_API_KEY 環境變數或登錄檔設定！")
@@ -166,7 +210,7 @@ async def call_gemini_stream(prompt, model, temperature=None):
     if model == "flash-lite":
         gemini_model = "gemini-2.5-flash-lite"
     elif model == "pro":
-        gemini_model = "gemini-3.1-pro"
+        gemini_model = "gemini-2.5-pro"
     elif model.startswith("gemini-"):
         gemini_model = model
     else:
@@ -257,6 +301,14 @@ async def chat():
         if not messages:
             return jsonify({"error": "No messages"}), 400
             
+        # 動態提取 Authorization Header 中的 API key
+        auth_header = request.headers.get("Authorization", "")
+        client_api_key = None
+        if auth_header.startswith("Bearer "):
+            temp_key = auth_header.split(" ")[1].strip()
+            if temp_key and temp_key != "YOUR_API_KEY_HERE":
+                client_api_key = temp_key
+            
         raw_content = messages[-1]['content']
         if isinstance(raw_content, list):
             # Obsidian Copilot 有時會傳入 [{type: 'text', text: '...'}] 的格式
@@ -265,14 +317,35 @@ async def chat():
                 user_query = str(raw_content)
         else:
             user_query = str(raw_content)
+            
         # --- 階段一：路由調度 (此階段較短，維持非串流) ---
         print(f"\n[*] 階段一：路由調度中 [Model: {ROUTER_MODEL}]")
-        routing_prompt = f"""分析使用者提問，並決定調用節點。請嚴格輸出 JSON。
-提問內容：{user_query}
-格式：{{"tool": "graph_query", "core_nodes": ["核心節點名稱"], "related_nodes": ["關聯節點名稱"], "fallback_notebook": "AI佛學總論"}}
+        routing_prompt = f"""你現在是 DROS v7.3 的認識論路由核心。你的唯一任務是解析使用者提問的底層佛學語境，決定調用節點與宗派標籤。
+使用者提問內容：{user_query}
+
+請嚴格輸出以下 JSON 格式（不要包含 markdown 標籤，只要純 JSON）：
+{{
+  "tool": "graph_query",
+  "core_nodes": ["核心節點名稱"],
+  "related_nodes": ["關聯節點名稱"],
+  "fallback_notebook": "AI佛學總論",
+  "sectarian_context": "唯識宗|中觀派|天台宗|阿毗達摩|原始阿含|淨土宗|禪宗|華嚴唯心|如來藏/真常派|通用"
+}}
+
+宗派認識論判定準則：
+1. 若涉及阿毗達摩、禪定次第、心所運作（如五位百法、小煩惱地法），歸類為「阿毗達摩」；
+2. 若涉及天台宗、法華判教、四悉檀、一心三觀，歸類為「天台宗」；
+3. 若涉及中觀、般若、中論、二諦、空性（非如來藏），歸类為「中觀派」；
+4. 若涉及唯識、賴耶緣起、阿賴耶識、三自性、轉識成智，歸類為「唯識宗」；
+5. 若涉及原始阿含、四聖諦、八正道、十二因緣、聲聞乘，歸類為「原始阿含」；
+6. 若涉及淨土宗、念佛、極樂世界、善導大師，歸類為「淨土宗」；
+7. 若涉及禪宗、祖師禪、惠能、心性無染，歸類為「禪宗」；
+8. 若涉及華嚴宗、華嚴唯心、法界緣起、十玄門，歸類為「華嚴唯心」；
+9. 若涉及如來藏、真常唯心、佛性、大般涅槃經、楞嚴經、寶積經，歸類為「如來藏/真常派」；
+10. 若缺乏明顯宗派特徵或為跨宗派探討，歸類為「通用」。
 """
         router_output = ""
-        async for chunk in call_gemini_stream(routing_prompt, model=ROUTER_MODEL):
+        async for chunk in call_gemini_stream(routing_prompt, model=ROUTER_MODEL, api_key=client_api_key):
             router_output += chunk
             
         try:
@@ -281,15 +354,17 @@ async def chat():
             nodes = plan.get('core_nodes', [])
             related = plan.get('related_nodes', [])
             notebook = plan.get('fallback_notebook') or "AI佛學總論"
-            print(f"    -> 核心: {nodes} / 關聯: {related}")
+            sectarian_context = plan.get('sectarian_context') or "通用"
+            print(f"    -> 核心: {nodes} / 關聯: {related} | 宗派: {sectarian_context}")
         except:
             print("    [!] 路由解析失敗。")
             nodes = []
             related = []
             notebook = "AI佛學總論"
+            sectarian_context = "通用"
 
         # --- 階段二：檢索 (Graphify First) ---
-        context = await get_node_content_async(nodes, related)
+        context = await get_node_content_async(nodes, related, sectarian_context=sectarian_context, query=user_query)
         
         # --- [FALLBACK] 6.2 降級機制：如果本地找不到內容，啟動 Vector RAG ---
         if not context.strip():
@@ -297,9 +372,18 @@ async def chat():
             
         # --- 🚨 DROS 7.3 物理熔斷與合約感知對齊 ---
         contracts_dir = Path(os.path.join(VAULT_ROOT, "contracts"))
-        requested_mode = data.get("model", "bodhisattva").lower()
-        if "vajra" in requested_mode or "gold" in requested_mode:
-            contract_name = "vajra_strict"
+        # 優先自訂契約欄位，其次別名相容 model 欄位
+        requested_mode = (data.get("contract") or data.get("model", "bodhisattva")).lower()
+        if "strict_vajra" in requested_mode or "strict" in requested_mode or "gold" in requested_mode:
+            contract_name = "strict_vajra"
+        elif "balanced_vajra" in requested_mode or "balanced" in requested_mode or "interpretive" in requested_mode:
+            contract_name = "balanced_vajra"
+        elif "speculative_prajna" in requested_mode or "speculative" in requested_mode or "prajna" in requested_mode:
+            contract_name = "speculative_prajna"
+        elif "default_vajra" in requested_mode:
+            contract_name = "default_vajra"
+        elif "vajra" in requested_mode:
+            contract_name = "strict_vajra"
         else:
             contract_name = "bodhisattva_default"
             
@@ -333,7 +417,7 @@ async def chat():
         if not prompt_template:
             # 極簡 Fallback 內置常量
             prompt_template = """# DROS 核心提示詞：v5.5 契約感知與雙軌智慧引擎
-你是 DROS 7.2 的法義推理單元。本次行為由注入的 {{EXECUTION_CONTRACT}} 與 {{RUNTIME_MODE}} 完全決定。
+你是 DROS 7.3 的法義推理單元。本次行為由注入的 {{EXECUTION_CONTRACT}} 與 {{RUNTIME_MODE}} 完全決定。
 
 ## ⚙️ 雙軌執行協議
 ### 【Vajra 金剛模式】
@@ -342,12 +426,12 @@ async def chat():
 - 溫潤、親切、慈悲感。方便譬喻，結尾鼓勵。
 
 ---
-*Dharma Reasoning OS v7.2 — 金剛治學，菩薩度眾，理事無礙。*"""
+*Dharma Reasoning OS v7.3 — 金剛治學，菩薩度眾，理事無礙。*"""
 
         # 準備注入內容
         injected_nodes_text = context if context.strip() else "（未檢索到相關權威節點）"
 
-        # 語言感知處理 (DROS 7.2 強約束語系合約)
+        # 語言感知處理 (DROS 7.3 強約束語系合約)
         lang = data.get('lang', 'ZH')
         target_language = "Traditional Chinese (繁體中文)" if lang == "ZH" else "Academic English (學術英文)"
 
@@ -374,7 +458,7 @@ async def chat():
         if is_stream:
             async def generate():
                 try:
-                    async for chunk in call_gemini_stream(final_prompt, model=model_to_use, temperature=temp_to_use):
+                    async for chunk in call_gemini_stream(final_prompt, model=model_to_use, temperature=temp_to_use, api_key=client_api_key):
                         # 模擬 OpenAI SSE 格式
                         payload = {
                             "choices": [{"delta": {"content": chunk}, "index": 0, "finish_reason": None}]
@@ -389,7 +473,7 @@ async def chat():
             return Response(generate(), mimetype='text/event-stream')
         else:
             full_answer = ""
-            async for chunk in call_gemini_stream(final_prompt, model=model_to_use, temperature=temp_to_use):
+            async for chunk in call_gemini_stream(final_prompt, model=model_to_use, temperature=temp_to_use, api_key=client_api_key):
                 full_answer += chunk
             
             return jsonify({
@@ -401,6 +485,6 @@ async def chat():
         return jsonify({"error": {"message": str(e)}}), 500
 
 if __name__ == '__main__':
-    print("--- [Digital Dharma Gateway v5.1] Async SSE + Vector RAG Fallback Active ---")
+    print("--- [Digital Dharma Gateway v7.3] Async SSE + Vector RAG Fallback Active (Port 5000) ---")
     import uvicorn
     uvicorn.run(app, host='0.0.0.0', port=5000)

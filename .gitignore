@@ -45,3 +45,8 @@ $RECYCLE.BIN/
 
 # Exclude obsolete historical documents from GitHub uploads
 docs/archive/
+
+# Large files exceeding GitHub's 100MB limit
+*.pdf
+zhii_para_map.json
+deleted_nodes_manifest.json

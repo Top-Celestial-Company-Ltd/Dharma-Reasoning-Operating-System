@@ -9,10 +9,6 @@ import yaml
 from pathlib import Path
 from typing import Dict, Any, List
 from dataclasses import dataclass, field
-from dotenv import load_dotenv
-
-# 嘗試載入 .env
-load_dotenv()
 
 # 解決 Windows 繁體中文環境 cp950 / UTF-8 終端機顯示 Emoji 的編碼崩潰問題
 if hasattr(sys.stdout, 'reconfigure'):
@@ -29,7 +25,7 @@ if hasattr(sys.stderr, 'reconfigure'):
 @dataclass
 class DrosConfig:
     """DROS 全域配置類別"""
-    version: str = "7.0"
+    version: str = "7.3"
     
     # 路徑
     core_path: Path = Path("core")
@@ -47,6 +43,7 @@ class DrosConfig:
     hardening_level: int = 5
     authority_nodes_only: bool = False
     max_context_length: int = 12000
+    max_quote_slices: int = 3
     
     # GuardVM
     forbidden_phrases: List[str] = field(default_factory=list)
@@ -80,6 +77,7 @@ class DrosConfig:
             hardening_level=int(env("hardening_level", data["system"]["hardening_level"])),
             authority_nodes_only=env("authority_nodes_only", str(data["system"]["authority_nodes_only"])).lower() == "true",
             max_context_length=int(env("max_context_length", data["system"]["max_context_length"])),
+            max_quote_slices=int(env("max_quote_slices", data["system"].get("max_quote_slices", 3))),
             
             forbidden_phrases=data["guard_vm"]["strict_forbidden_phrases"]
         )
@@ -117,6 +115,7 @@ except Exception:
         hardening_level=5,
         authority_nodes_only=False,
         max_context_length=12000,
+        max_quote_slices=3,
         forbidden_phrases=["我認為", "我覺得", "大概是", "可能", "應該是", "我猜", "個人認為", "在我看來"]
     )
 

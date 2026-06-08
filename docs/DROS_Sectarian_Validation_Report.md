@@ -1,6 +1,8 @@
 # DROS 義理合約與本體論治理評估報告
 ## —— 掛載與未掛載「大覺藏」文獻庫之極限測試與防污染防禦實證
 
+[繁體中文](DROS_Sectarian_Validation_Report.md) | [English](DROS_Sectarian_Validation_Report_en.md)
+
 DROS (Dharma Reasoning OS) 是全球首創基於 **「微內核 + 物理文件約束」** 架構的 AI 義理推理與邊界治理引擎。為驗證 DROS 在面對高度複雜的「佛教本體論陷阱題」、「跨宗派邏輯交鋒」與「禪定心理學機制」時的推理能力、幻覺防範率以及對宗派語意污染的防禦能力，我們在以下兩種底層配置下進行了相同的「世界級極限測試題」考核：
 
 1. **未掛載「大覺藏」**：僅使用基礎概念節點（位於 `DROS_Official_Vault_v5.2` 內，多數大正藏與藏要文獻為空心預留節點，使用通用 NotebookLM 快取與 LLM 外部權重作為輔助）。

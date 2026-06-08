@@ -1,0 +1,47 @@
+# ========================================================
+# DROS Vajra Policy - Agentic AI Tool Call Policy (v1)
+# ========================================================
+vajra_version: 1
+
+agents:
+  - id: "customer_service"
+    role: "support"
+  - id: "accounting_agent"
+    role: "financial"
+  - id: "maintenance_agent"
+    role: "ops"
+
+capabilities:
+  customer_service:
+    - "READ_CRM"
+    - "READ_LOGS"  # This will trigger an INFO: Unused capability
+  accounting_agent:
+    - "READ_CRM"
+    - "WRITE_PAYMENT"
+  maintenance_agent:
+    - "READ_LOGS"
+
+tools:
+  - name: "crm.read.profile"
+    requires:
+      - "READ_CRM"
+  - name: "payment.execute_transfer"
+    requires:
+      - "WRITE_PAYMENT"
+  - name: "sys.reboot"
+    requires:
+      - "SYSTEM_REBOOT"  # This will trigger a WARN: Unreachable Tool
+
+rules:
+  # Normal allowed rule
+  - match:
+      agent: "customer_service"
+      tool: "crm.read.*"
+    effect: "ALLOW"
+  
+  # Dangerous Grant rule (Non-admin agent granted admin.*)
+  # This will trigger a CRITICAL scan block!
+  - match:
+      agent: "customer_service"
+      tool: "admin.*"
+    effect: "ALLOW"
