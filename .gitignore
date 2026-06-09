@@ -50,3 +50,9 @@ docs/archive/
 *.pdf
 zhii_para_map.json
 deleted_nodes_manifest.json
+
+# Local scripture vault (NEVER upload to GitHub)
+Vault_DajueZang/
+.graphify_cache.pkl
+.smtcmp_vector_db.tar.gz
+00_黃金索引庫/
