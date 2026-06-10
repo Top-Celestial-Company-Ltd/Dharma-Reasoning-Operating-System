@@ -58,11 +58,11 @@ const LOCALIZATION = {
         saveNoteError: "❌ 儲存筆記失敗: ",
         linkNoticeSuccess: "📎 當前筆記內容已加入 AI 推理上下文！",
         linkNoticeCancel: "📎 已取消筆記連結",
-        connError: "❌ 無法與 DROS 後端取得連線。請雙擊執行「雙擊執行-DROS金剛注射器.bat」啟動 Quart API 服務 (連接埠 5000)！",
+        connError: "❌ 無法與 DROS 後端取得連線。請雙擊執行「run_vajra_injector.bat」啟動 Quart API 服務 (連接埠 5000)！",
         noticeSelectText: "請先選中您要定錨的義理名相！",
         noticeRequesting: "🔍 正在向 DROS 請求定錨：",
         noticeAnchorSuccess: "【DROS 義理定錨成功】",
-        noticeNoBackend: "❌ DROS 後端未啟動，請執行「DROS金剛注射器.bat」！",
+        noticeNoBackend: "❌ DROS 後端未啟動，請執行「run_vajra_injector.bat」！",
         unnamed: "未命名名相",
         anchorRecord: "DROS 義理定錨記錄",
         coreDoctrinal: "核心義理",
@@ -80,7 +80,7 @@ const LOCALIZATION = {
             installTitle: "📥 簡易安裝三步驟 | Simple 3-Step Installation",
             installSteps: [
                 "<strong>啟用外掛</strong>：進入 <code>設定 (Settings)</code> -> <code>社群外掛載入 (Community Plugins)</code>，找到 <strong>DROS Doctrinal Copilot</strong> 並點擊啟用。",
-                "<strong>啟動本地後端</strong>：前往專案根目錄，執行 <code>雙擊執行-DROS金剛注射器.bat</code> 啟動本地知識守護後端服務（若採 Gemini 直連模式則免此步）。",
+                "<strong>啟動本地後端</strong>：前往專案根目錄，執行 <code>run_vajra_injector.bat</code> 啟動本地知識守護後端服務（若採 Gemini 直連模式則免此步）。",
                 "<strong>喚醒伴學面板</strong>：點擊 Obsidian 左側功能列的 <strong>🪷 輪寶圖標 (Dharma Chakra Icon)</strong> 即可展開右側對話伴學視窗！"
             ],
             sopTitle: "💡 極簡操作 SOP",

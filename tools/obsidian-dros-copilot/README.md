@@ -17,8 +17,8 @@ DROS Doctrinal Copilot 是為 DROS (Deterministic Runtime OS) 系統量身打造
 
 ### 第二步：啟動本地後端服務 (Start Backend Service)
 1. 本外掛之高精度檢索與推理邊界控制功能，需依賴本地 DROS 守護進程。
-2. 前往專案根目錄，尋找 `run_vajra_injector.bat`（中文系統可尋找 `雙擊執行-DROS金剛注射器.bat`，或在終端機中執行對應的啟動腳本）。
-3. 雙擊執行該批次檔，啟動本地 API 代理服務與知識守護進程，確保後端順利在 `Port 5000` 運行。
+2. 前往專案根目錄，雙擊執行 `run_vajra_injector.bat`（此腳本會自動檢查並安裝所有必要 Python 套件並啟動服務）。
+3. 啟動後，本地 API 代理服務與知識守護進程將會在背景保持執行，確保後端順利在 `Port 5000` 運行。
 
 ### 第三步：喚醒伴學面板 (Launch Copilot)
 1. 在 Obsidian 左側功能列中，點擊 **🪷 輪寶圖標 (Dharma Chakra Icon)**。
