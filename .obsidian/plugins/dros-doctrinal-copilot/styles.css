@@ -162,14 +162,15 @@
 }
 
 .dros-chat-bubble.assistant.shimmering .content {
-    background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,215,0,0.08) 50%, rgba(255,255,255,0.05) 75%);
-    background-size: 200% 100%;
-    animation: loadingShimmer 1.5s infinite;
+    background: rgba(255, 215, 0, 0.06) !important;
+    border: 1px solid rgba(255, 215, 0, 0.18) !important;
+    color: #ffd700 !important;
+    animation: zenBreathing 1.8s ease-in-out infinite;
 }
 
-@keyframes loadingShimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+@keyframes zenBreathing {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1.0; }
 }
 
 /* 訊息卡片動作欄 */
@@ -272,6 +273,23 @@
 .dros-send-btn:hover {
     background: rgba(255, 215, 0, 0.25);
     box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+/* ⏹ 取消模式：按鈕變紅色系，帶 pulse 提示 */
+.dros-send-btn.dros-cancel-mode {
+    background: rgba(220, 60, 60, 0.15);
+    border: 1px solid rgba(220, 80, 80, 0.4);
+    color: #ff7070;
+    animation: dros-cancel-pulse 1.6s ease-in-out infinite;
+}
+.dros-send-btn.dros-cancel-mode:hover {
+    background: rgba(220, 60, 60, 0.35);
+    box-shadow: 0 0 10px rgba(220, 60, 60, 0.4);
+    animation: none;
+}
+@keyframes dros-cancel-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.55; }
 }
 
 .dros-clear-btn {

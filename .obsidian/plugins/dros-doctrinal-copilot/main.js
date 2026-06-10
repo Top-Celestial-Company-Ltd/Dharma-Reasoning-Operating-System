@@ -397,7 +397,6 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
                 return;
             }
             let contentText = await app.vault.read(file);
-
             // 🚨 DROS 7.3 核心升級：若節點為「虛空指針」，動態解析 t_coordinates 並從大覺藏中召回經文
             if (contentText.includes('node_type: "Void Pointer"') || contentText.includes('node_type: Void Pointer')) {
                 const coordMatch = contentText.match(/t_coordinates:\s*\[(.*?)\]/);
@@ -405,7 +404,8 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
                     const tList = coordMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''));
                     const allFiles = app.vault.getMarkdownFiles();
                     for (const tNum of tList) {
-                        if (!tNum) continue;
+                        if (!tNum)
+                            continue;
                         const matchedFile = allFiles.find(f => f.name.startsWith(tNum) && f.path.toLowerCase().includes("vault_dajuezang/"));
                         if (matchedFile) {
                             let vContent = await app.vault.read(matchedFile);
@@ -420,7 +420,6 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
                 }
                 return;
             }
-
             let data = "";
             const summaryRegex = /> \[!NOTE\] (?:核心義理|歷史精鍊).*?\n(?:> .*?\n)+/is;
             const quoteRegex = /> \[(?:!QUOTE|!NOTE)\] (?:原典引文|跨館開採|語義融合).*?\n(?:> .*?\n)+/is;
