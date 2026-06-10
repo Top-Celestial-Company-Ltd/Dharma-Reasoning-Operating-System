@@ -15,7 +15,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 from proxy.gemini_proxy import app
 
 if __name__ == '__main__':
-    print("🌐 DROS Proxy 根目錄入口啟動中 (Sandbox Port 5001)...")
+    print("🌐 DROS Proxy 根目錄入口啟動中 (Port 5000)...")
     
     # 同步 Windows 註冊表中的最新 API Key (避開父進程繼承的舊環境變數)
     import os
@@ -31,5 +31,5 @@ if __name__ == '__main__':
         print(f"[!] 同步註冊表金鑰失敗: {e}")
         
     import uvicorn
-    uvicorn.run("proxy.gemini_proxy:app", host='0.0.0.0', port=5001, reload=True)
+    uvicorn.run("proxy.gemini_proxy:app", host='0.0.0.0', port=5000, reload=True)
 

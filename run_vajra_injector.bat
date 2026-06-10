@@ -1,85 +1,67 @@
 @echo off
-:: Force active code page to UTF-8
+:: Force active code page to UTF-8 to prevent encoding issues in CMD
 chcp 65001 >nul 2>&1
 setlocal enabledelayedexpansion
 
+TITLE DROS v7.3 Vajra Launcher (One-Click Installer & Launcher)
+
 echo ========================================================
-echo   DROS 7.1 Nirvana Edition - Vajra Launcher v2.4
-echo   Dharma Reasoning OS - Boot Bootstrapping
+echo   DROS v7.3 Nirvana Edition - Vajra Launcher v3.0
+echo   Dharma Reasoning OS - One-Click Start & Install
 echo ========================================================
 echo.
 
-rem 1. Set and Detect DROS 7.0 Release Directory via 100% Pure English Relative Path
-set "DROS_DIR=..\DROS_GitHub_Release_v5.2"
-
-if not exist "%DROS_DIR%\main.py" (
-    rem Fallback: If executed from within the release folder itself
-    set "DROS_DIR=."
-)
-
-if not exist "%DROS_DIR%\main.py" (
-    echo [ERROR] Cannot locate DROS engine directory.
-    echo         Please make sure 'DROS_GitHub_Release_v5.2' is placed alongside your vault folder.
-    pause
-    exit /b 1
-)
-
-echo [1/3] Target directory located: %DROS_DIR%
-cd /d "%DROS_DIR%"
-
-rem 2. Check and configure .env
-if not exist ".env" (
-    echo [WARNING] .env file not found.
-    echo           Please set your GEMINI_API_KEY.
-    set /p apiKey="Please enter your Gemini API Key: "
-    if not "!apiKey!"=="" (
-        echo GEMINI_API_KEY=!apiKey! > .env
-        echo [OK] API Key saved to .env
-    )
-) else (
-    echo [OK] .env file loaded.
-)
-
-rem 3. Activate Python Virtual Environment (venv)
-if exist "venv\Scripts\activate.bat" (
-    echo [OK] Activating virtual environment [venv]...
-    call venv\Scripts\activate.bat
-) else (
-    echo [WARNING] venv not found. Using system default python.
-)
-
-python --version > nul 2>&1
-if errorlevel 1 (
+:: Step 1: Detect Python Environment
+python --version >nul 2>&1
+if %errorlevel% neq 0 (
     echo [ERROR] Python not found or not in PATH!
+    echo         Please install Python (3.9+ recommended) and check "Add Python to PATH".
+    echo [錯誤] 找不到 Python 環境或未加入 PATH 環境變數！
+    echo         請安裝 Python 並在安裝時勾選 "Add Python to PATH"。
+    echo.
     pause
     exit /b 1
 )
 
-rem 4. Execute Doctrinal Hardening
+:: Step 2: Auto-Install / Verify Dependencies
+echo [1/2] Verifying and installing system dependencies...
+echo       正在檢查與安裝必要套件，請稍候...
 echo.
-echo [2/3] Hardening Doctrinal Manifest (dna_enricher)...
-python -m src.pipeline.dna_enricher
 
-if errorlevel 1 (
-    echo [WARNING] dna_enricher execution finished with warnings.
+python -m pip install --upgrade pip -q
+python -m pip install pyyaml uvicorn google-generativeai fastapi httpx python-dotenv quart quart-cors aiohttp -q
+
+if %errorlevel% neq 0 (
     echo.
-) else (
-    echo [OK] Hardening complete!
+    echo [ERROR] Dependency installation failed! Please check your internet connection.
+    echo [錯誤] 套件安裝失敗，請檢查網路連線後重試。
+    echo.
+    pause
+    exit /b 1
 )
 
-rem 5. Start Quart API Proxy Server
 echo.
-echo [3/3] Starting DROS Proxy API server on port 5000...
+echo [OK] All dependencies are ready! (所有套件已就緒)
+echo.
+
+:: Step 3: Run DROS Proxy Server (Port 5000)
+echo [2/2] Starting DROS Proxy API server on port 5000...
 echo --------------------------------------------------------
 echo   KEEP THIS WINDOW OPEN! DO NOT CLOSE IT!
 echo   Go back to Obsidian and refresh Copilot to connect.
+echo.
+echo   請保持此視窗開啟！不要關閉它！
+echo   返回 Obsidian 並刷新 Copilot 即可開始對話伴學。
 echo --------------------------------------------------------
 echo.
 
-python main.py --serve
+python gemini_proxy.py
 
-if errorlevel 1 (
-    echo [ERROR] Server terminated unexpectedly.
+if %errorlevel% neq 0 (
+    echo.
+    echo [ERROR] Server terminated unexpectedly. Please check config.yaml or API Key settings.
+    echo [錯誤] 服務異常終止，請確認 config.yaml 與 API 金鑰設定。
+    echo.
     pause
     exit /b 1
 )
