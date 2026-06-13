@@ -5,7 +5,7 @@
 ## ⚖️ Core Philosophy
 **Logic to the System, Practice to the Practitioner.**
 
-DROS v7.3 (Nirvana Edition) is a "Dharma Reasoning Operating System" designed for precise textual retrieval and logical deduction. To prevent hallucinations and ensure religious safety, the system adheres to strict non-involvement boundaries.
+DROS v7.3 is a "Dharma Reasoning Operating System" designed for precise textual retrieval and logical deduction. To prevent hallucinations and ensure religious safety, the system adheres to strict non-involvement boundaries.
 
 ---
 
