@@ -93,7 +93,7 @@ const LOCALIZATION = {
             },
             synthesizerModel: {
                 name: "🧠 合成與推理模型 | Synthesizer Model",
-                desc: "直連模式下，負責 Stage 3 最終義理合成與深度推理的模型（推薦：gemini-2.5-pro）。 | The model responsible for Stage 3 final doctrinal synthesis and deep reasoning (Recommended: gemini-2.5-pro)."
+                desc: "直連模式下，負責 Stage 3 最終義理合成與深度推理的模型（推薦：gemini-2.5-pro）。⚠️注意：因「金剛合約」對話溫度被鎖定在0.05以確保零幻覺決定性推理，請務必篩選選用邏輯與指令遵循度極高之推理模型（如gemini-2.5-pro, gpt-4o, claude-3-5-sonnet），避免選用創意型或參數較小的弱模型（容易造成無限循環或答非所問）。 | The model responsible for Stage 3 final doctrinal synthesis and deep reasoning (Recommend⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops.ed: gemini-2.5-pro)."
             },
             customEndpoint: {
                 name: "🔌 自訂 API 端點 | Custom API Endpoint",
@@ -101,7 +101,7 @@ const LOCALIZATION = {
             },
             customModel: {
                 name: "🧠 自訂模型名稱 | Custom Model Name",
-                desc: "填寫自訂模型識別名稱 (例如: deepseek/deepseek-chat, gpt-4o 等)。 | Custom model identifier (e.g., deepseek-chat)."
+                desc: "填寫自訂模型識別名稱 (例如: deepseek/deepseek-chat, gpt-4o 等)。⚠️注意：因「金剛合約」對話溫度被鎖定在0.05以確保零幻覺決定性推理，請務必篩選選用邏輯與指令遵循度極高之推理模型（如gemini-2.5-pro, gpt-4o, claude-3-5-sonnet），避免選用創意型或參數較小的弱模型（容易造成無限循環或答非所問）。 | Custom model identifier (e.g., deepseek-chat). ⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops."
             },
             customRouterModel: {
                 name: "🧭 自訂路由模型 | Custom Router Model",
@@ -215,7 +215,7 @@ const LOCALIZATION = {
             },
             synthesizerModel: {
                 name: "🧠 Synthesizer Model",
-                desc: "In direct mode, the model responsible for Stage 3 final synthesis and deep reasoning (Recommended: gemini-2.5-pro)."
+                desc: "In direct mode, the model responsible for Stage 3 final synthesis and deep reasoning (Recommended: gemini-2.5-pro). ⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops."
             },
             customEndpoint: {
                 name: "🔌 Custom API Endpoint",
@@ -223,7 +223,7 @@ const LOCALIZATION = {
             },
             customModel: {
                 name: "🧠 Custom Model Name",
-                desc: "Custom model identifier name (e.g. deepseek/deepseek-chat, gpt-4o, etc.)."
+                desc: "Custom model identifier name (e.g. deepseek/deepseek-chat, gpt-4o, etc.). ⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops."
             },
             customRouterModel: {
                 name: "🧭 Custom Router Model",
