@@ -1,0 +1,23 @@
+{
+  "title": "DROS: Dharma Reasoning Operating System - A Deterministic Runtime and Formal Verification Guard for Agentic Web",
+  "description": "DROS is a microkernel-based software guard and reasoning runtime designed to enforce semantic constraints, prevent hallucination, and guarantee safety properties for LLM-based autonomous agents using formal contracts and runtime verification.",
+  "creators": [
+    {
+      "name": "Chen, Jui-Cheng (Jimmy)",
+      "affiliation": "Top Celestial Company Ltd.",
+      "orcid": ""
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-nc-sa-4.0",
+  "keywords": [
+    "DROS",
+    "Agentic Web",
+    "Formal Verification",
+    "Microkernel",
+    "Smart Contract",
+    "Large Language Models",
+    "AI Safety",
+    "Runtime Verification"
+  ]
+}
