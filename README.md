@@ -74,6 +74,17 @@ For complete integration tutorials, API references, and architectural whitepaper
 
 ---
 
+## 📚 Publications & Prior Art
+
+To establish legal and academic prior art (preventing malicious patent claims on our core technologies), the theoretical foundations and architectures of the DROS ecosystem have been officially anchored on **Zenodo** with permanent cryptographic timestamps:
+
+*   **Zero-Trust Identity**: *Execution Identity in Multi-Agent Systems: A Zero-Trust Runtime Governance Architecture* — [10.5281/zenodo.20775794](https://doi.org/10.5281/zenodo.20775794)
+*   **Ontological Routing (v7.3)**: *Deterministic Ontological Routing Framework for Domain-Restricted LLM Systems: Design and Implementation of DROS v7.3* — [10.5281/zenodo.20776076](https://doi.org/10.5281/zenodo.20776076)
+*   **Physical Circuit Breaking**: *Constraint-as-Code: Deterministic LLM Governance via Buddhist Doctrinal Classification and Physical Circuit Breaking* — [10.5281/zenodo.20776291](https://doi.org/10.5281/zenodo.20776291)
+*   **VajraClaw Infrastructure**: *DROS for Shielding Prompt Contamination and Hallucination: Runtime Governance Infrastructure for VajraAgent and VajraClaw* — [10.5281/zenodo.20776374](https://doi.org/10.5281/zenodo.20776374)
+
+---
+
 ## ⚖️ License & Intellectual Property
 
 - The architectural specifications and open-source Microkernels in this ecosystem are licensed under the **AGPL-3.0**. 

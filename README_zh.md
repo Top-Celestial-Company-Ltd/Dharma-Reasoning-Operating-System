@@ -71,6 +71,17 @@ VajraClaw 是一個商業級的物理層 C-FFI 適配器（`vajra_claw.dll` / `.
 
 ---
 
+## 📚 學術文獻與先前技術 (Publications & Prior Art)
+
+為確立本專案的法律與學術「先前技術（Prior Art）」（防止核心技術與獨創設計被他人惡意搶註專利），DROS 生態系的理論基礎與架構已正式發布於學術預印本平台 **Zenodo**，獲得不可篡改的數位時間戳記與學術 DOI：
+
+*   **零信任身分架構**：《Execution Identity in Multi-Agent Systems: A Zero-Trust Runtime Governance Architecture》 — [10.5281/zenodo.20775794](https://doi.org/10.5281/zenodo.20775794)
+*   **確定性本體路由 (v7.3)**：《Deterministic Ontological Routing Framework for Domain-Restricted LLM Systems: Design and Implementation of DROS v7.3》 — [10.5281/zenodo.20776076](https://doi.org/10.5281/zenodo.20776076)
+*   **物理保險絲熔斷**：《Constraint-as-Code: Deterministic LLM Governance via Buddhist Doctrinal Classification and Physical Circuit Breaking》 — [10.5281/zenodo.20776291](https://doi.org/10.5281/zenodo.20776291)
+*   **VajraClaw 執行治理**：《DROS for Shielding Prompt Contamination and Hallucination: Runtime Governance Infrastructure for VajraAgent and VajraClaw》 — [10.5281/zenodo.20776374](https://doi.org/10.5281/zenodo.20776374)
+
+---
+
 ## ⚖️ 授權協議與智慧財產權
 
 - 本生態系中的架構規範與開源微內核均基於 **AGPL-3.0** 協議授權。
