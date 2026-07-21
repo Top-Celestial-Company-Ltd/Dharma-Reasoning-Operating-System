@@ -1,5 +1,5 @@
 # 📜 DROS 7.0 Nirvana Edition - 系統清單 (System Manifest)
-> 產出時間: 2026-05-18 20:25
+> 產出時間: 2026-06-19 10:12
 > 系統狀態: **LOCKED / NIRVANA**
 
 ---
@@ -40,13 +40,18 @@
 ### 📄 Docs
 *   ARCHITECTURE_v7.md
 *   DESIGN_JUSTIFICATION.md
-*   DROS-System-Report-v7.0.md
+*   DROS-System-Report-v7.2.0.md
 *   DROS_BOUNDARY.md
 *   DROS_MANIFEST_v7.md
+*   DROS_MICROKERNEL_SPEC.md
+*   DROS_Sectarian_Validation_Report.md
 *   LIMITATIONS_AND_DEFENSE.md
 *   OBSIDIAN_PLUGIN_BLUEPRINT.md
-*   System_Prompt_v5.3.md
+*   PERFORMANCE_AND_HARDWARE.md
+*   System_Prompt_v5.5.md
 *   USER_GUIDE_v7.md
+*   USER_GUIDE_v7_EN.md
+*   devlog
 
 ### 📄 Tools
 *   __pycache__
@@ -65,12 +70,16 @@
 *   .env
 *   .gitignore
 *   CONTRIBUTING.md
+*   DROS_RFC_001_Whitepaper.md
 *   LICENSE
 *   LICENSE.md
 *   MANIFEST.in
 *   README.md
+*   SAFETY.md
+*   UPGRADE.md
 *   config.yaml
 *   dros_golden_manifest.json
+*   dros_logo.svg
 *   dros_test_pipeline.py
 *   gemini_proxy.py
 *   install.bat
@@ -80,7 +89,16 @@
 *   requirements.txt
 *   run.bat
 *   run.sh
+*   佛測-掛載大覺藏_V5.5_Graphify二級.md
+*   佛測-未掛載大覺藏_V5.5_Graphify二級.md
 *   雙擊執行-DROS金剛注射器.bat
+*   .obsidian\plugins\dros-doctrinal-copilot\README.md
+*   .obsidian\plugins\dros-doctrinal-copilot\System_Prompt_v5.5.md
+*   .obsidian\plugins\dros-doctrinal-copilot\data.json
+*   .obsidian\plugins\dros-doctrinal-copilot\dros_golden_manifest.json
+*   .obsidian\plugins\dros-doctrinal-copilot\main.js
+*   .obsidian\plugins\dros-doctrinal-copilot\manifest.json
+*   .obsidian\plugins\dros-doctrinal-copilot\styles.css
 *   contracts\balanced_vajra.yaml
 *   contracts\bodhisattva_default.yaml
 *   contracts\default_vajra.yaml
@@ -16977,13 +16995,18 @@
 *   core\System_Docs\萬點大覺藏生成紀錄.md
 *   docs\ARCHITECTURE_v7.md
 *   docs\DESIGN_JUSTIFICATION.md
-*   docs\DROS-System-Report-v7.0.md
+*   docs\DROS-System-Report-v7.2.0.md
 *   docs\DROS_BOUNDARY.md
 *   docs\DROS_MANIFEST_v7.md
+*   docs\DROS_MICROKERNEL_SPEC.md
+*   docs\DROS_Sectarian_Validation_Report.md
 *   docs\LIMITATIONS_AND_DEFENSE.md
 *   docs\OBSIDIAN_PLUGIN_BLUEPRINT.md
-*   docs\System_Prompt_v5.3.md
+*   docs\PERFORMANCE_AND_HARDWARE.md
+*   docs\System_Prompt_v5.5.md
 *   docs\USER_GUIDE_v7.md
+*   docs\USER_GUIDE_v7_EN.md
+*   docs\devlog\six_paths_great_union.md
 *   inbox\AI 善導_wiki_三惡道.md
 *   inbox\AI 善導_wiki_不退轉.md
 *   inbox\AI 善導_wiki_大梵天王.md
@@ -17127,6 +17150,10 @@
 *   scripts\inject_dna.bat
 *   scripts\run_cli.bat
 *   scripts\run_proxy.bat
+*   specs\DROS-RFC-001.md
+*   specs\DROS-RFC-002.md
+*   specs\DROS-RFC-003.md
+*   specs\DROS_Public_Terminology_and_Standards.md
 *   src\config.py
 *   src\engine\__init__.py
 *   src\engine\contract.py
@@ -17154,6 +17181,7 @@
 *   tools\contracts\default_vajra.yaml
 *   tools\obsidian-dros-copilot\.gitignore
 *   tools\obsidian-dros-copilot\README.md
+*   tools\obsidian-dros-copilot\System_Prompt_v5.5.md
 *   tools\obsidian-dros-copilot\main.js
 *   tools\obsidian-dros-copilot\main.js.map
 *   tools\obsidian-dros-copilot\main.ts

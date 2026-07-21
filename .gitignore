@@ -36,23 +36,11 @@ $RECYCLE.BIN/
 *.sln
 *.swp
 
-# Obsidian local configurations & SENSITIVE KEYS
+# Obsidian local configurations (excluding templates)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/backups/
 .obsidian/plugins/hotkeys.json
-.obsidian/plugins/*/data.json
 
 # Exclude obsolete historical documents from GitHub uploads
 docs/archive/
-
-# Large files exceeding GitHub's 100MB limit
-*.pdf
-zhii_para_map.json
-deleted_nodes_manifest.json
-
-# Local scripture vault (NEVER upload to GitHub)
-Vault_DajueZang/
-.graphify_cache.pkl
-.smtcmp_vector_db.tar.gz
-00_黃金索引庫/

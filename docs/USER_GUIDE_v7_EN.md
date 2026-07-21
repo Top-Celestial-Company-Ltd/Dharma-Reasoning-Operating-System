@@ -40,24 +40,31 @@
    - Click the **"Turn off Safe Mode"** button on the screen (This is a mandatory step to allow local third-party plugins to run).
    - Scroll down, find **`DROS Doctrinal Copilot`** in the "Installed plugins" list, and toggle the switch on the right to **On (Enabled)**.
    - Next, click the ⚙️ Gear icon next to the plugin name to enter the plugin settings and configure your connection:
-     - 🛡️ **If using the local DROS Proxy (Default/Recommended)**: Set `API Endpoint` to `http://127.0.0.1:5000/v1` (This points to your local machine).
+     - 🛡️ **If using the local DROS Proxy (Default/Recommended)**: Set `API Endpoint` to `http://127.0.0.1:8080/v1` (This points to your local machine).
      - 🌐 **If connecting directly to Google Gemini API (No Proxy)**: Leave `API Endpoint` blank (or enter `https://generativelanguage.googleapis.com/v1beta`), and paste your Google API Key below.
      - 🔄 **If using other AI providers (e.g., OpenAI, Groq)**: Change the `API Endpoint` to the provider's standard Base URL (e.g., `https://api.openai.com/v1`), and enter the corresponding API Key.
 6. **Start DROS Core Reasoning Engine (Proxy Server)**: 
-   In the project folder, **double-click `run_vajra_injector.bat`** (Mac/Linux users: run `python gemini_proxy.py` in terminal). This script will automatically check and install all required Python dependencies (no manual pip required), mount the scriptures, load the Vajra Precepts with your API Key, and start the service on local Port 5000.
+   In the project folder, double-click `gemini_proxy.vbs` (Mac/Linux users: run `python src/proxy/gemini_proxy.py` in terminal). Once started, it will prompt you to enter the Gemini API Key from Step 3.
    *(💡 Tip: At this point, the system has loaded the built-in 16,000 core golden nodes. You now have basic doctrinal reasoning capabilities!)*
-7. **(No Injection Required) Auto-Mounting**: 
-   If you have downloaded the full 1.6GB Mahabodhi Pitaka and placed it under `Vault_DajueZang/`, DROS v7.3 will hot-mount the files automatically without needing any separate injection scripts.
+7. **(Advanced) Inject Mahabodhi Pitaka & Vajra Precepts**: 
+   If you have downloaded the full 1.6GB Mahabodhi Pitaka, or need to update the strictest Vajra Contracts, **double-click `DROS金剛注射器` (DROS Vajra Injector)** AFTER the Proxy is running successfully.
 
 > [!IMPORTANT]
-> **💡 MUST READ: What exactly does `run_vajra_injector.bat` do?**
-> *   **File Location**: In the root directory of the project (named `run_vajra_injector.bat`).
-> *   **When to run**: Every time you boot up, or before you start using the Obsidian Copilot.
-> *   **Purpose**: It acts as the local API Gateway and Knowledge Guardian. Starting it allows your Obsidian plugin (DROS Doctrinal Copilot) to seamlessly connect to the local knowledge base, referencing Mahabodhi Pitaka scriptures and Vajra Precepts.
-> *   **Automation**: This script will automatically detect your Python environment, and auto-install/verify all required packages in the background (no manual python setup or pip commands required).
-> *   **Note**: Please keep the black command prompt window open. Do not close it while using the system.
+> **💡 MUST READ: What exactly do these two programs do?**
+> For general users, you only need to remember the timing and purpose of these two scripts:
 > 
-> 👉 **Boot Mantra: "Double-click `run_vajra_injector.bat` to install and start, then open Obsidian to learn!"**
+> **1. `gemini_proxy.vbs` (Run First: Establish the Channel)**
+> *   **File Location**: In the absolute root directory of the project.
+> *   **When to run**: Every time you boot up, or right before you start using the AI, **the first step** is to double-click this.
+> *   **Purpose**: It acts as a "low-level network gateway (Proxy)". Starting it tells your chat software to route the packets—originally destined directly for Google Gemini—through our "DROS Digital Dharma Hall" system first.
+> 
+> **2. `DROS金剛注射器` / Vajra Injector (Run Second: Mount the Pitaka)**
+> *   **File Location**: In the absolute root directory of the project (Usually named `雙擊執行-DROS金剛注射器.bat`).
+> *   **When to run**: After the Proxy is running smoothly in the background, you run this when you want to **mount, update, or switch the "Mahabodhi Pitaka (Knowledge Base Index & Precepts)"**.
+> *   **Purpose**: If you only run the Proxy, the system is just an "empty channel," and the AI will reply with its standard, generic tone. The purpose of running the "Vajra Injector" is to **"inject"** the neural network index of the Pitaka (RAG Context) and the Vajra Precepts (System Prompt) into this channel.
+> *   **Conclusion**: Yes! **You MUST run the injector for the Pitaka index to be properly loaded.** Otherwise, the AI cannot reference the exclusive wisdom and scriptures within the Digital Dharma Hall.
+> 
+> 👉 **Standard Boot Mantra: "First start the Proxy to build the channel, then run the Vajra Injector to load the Pitaka!"**
 
 8. **Begin Doctrinal Q&A**: Return to Obsidian and open the exclusive **DROS Doctrinal Copilot** chat window via the right panel or commands. You can now engage in high-dimensional doctrinal conversations with your "Zero-Hallucination Digital Companion"!
 
@@ -75,7 +82,7 @@ The simplest, most foolproof mode. Ready out-of-the-box, no Python background se
 
 ### 2. Geek Developer Mode (Local Proxy Mode)
 Use this mode if you are a developer looking to modify the core Python algorithms (e.g., `Weaver` or `GuardVM`).
-- **Setup**: Toggle `Enable Local Proxy` and point the API Endpoint to `http://127.0.0.1:5000/v1`.
+- **Setup**: Toggle `Enable Local Proxy` and point the API Endpoint to `http://127.0.0.1:8080/v1`.
 - **Mechanism**: All chat and anchoring requests bypass the plugin's direct handling and are forwarded to the local background `gemini_proxy.py`, granting you 100% algorithmic freedom.
 
 > [!TIP]

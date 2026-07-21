@@ -181,7 +181,7 @@ class GraphifyRetriever:
                         ngrams.append(word)
         return list(set(ngrams))
 
-    def search(self, query: str, top_k: int = 10, min_score: float = 6.0, sectarian_context: str = "通用", user_query: str = "") -> List[Dict]:
+    def search(self, query: str, top_k: int = 10, min_score: float = 6.0, sectarian_context: str = "通用") -> List[Dict]:
         """v2.7 強化檢索：極速座標匹配 + 多維度權重 + N-Gram 語義擴展 + 倒排匹配 + 宗派標籤過濾"""
         start_time = time.perf_counter()
         if not query or not query.strip():
@@ -225,7 +225,7 @@ class GraphifyRetriever:
         results = []
         for node_name, score in sorted_results[:top_k]:
             if score >= min_score:
-                node = self._load_node_detail(node_name, user_query or query, sectarian_context)
+                node = self._load_node_detail(node_name, query, sectarian_context)
                 if node:
                     node["match_score"] = round(score, 1)
                     results.append(node)

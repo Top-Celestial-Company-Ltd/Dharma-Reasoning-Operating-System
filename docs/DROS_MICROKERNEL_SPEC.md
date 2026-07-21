@@ -1,8 +1,6 @@
 # 📿 DROS Micro-kernel Standard Specification
 ## DROS-RFC 001: Unified Multi-Language µDROS Core Architecture
 
-[繁體中文](DROS_MICROKERNEL_SPEC.md) | [English](DROS_MICROKERNEL_SPEC_en.md)
-
 > **"One Specification to rule them all, One Manifest to bind them, One Topology to bring them all, and in the Offline Reasoning shine them."**  
 > ── DROS Core Architects (Jimmy Chen & Antigravity)
 
@@ -25,7 +23,7 @@ DROS 微內核（µDROS Core）旨在以 **極致輕量（<1000行）、零外�
 
 ```json
 {
-  "version": "7.0",
+  "version": "7.2",
   "metadata": {
     "node_count": 16071,
     "compiled_at": "2026-05-19T12:00:00Z"
@@ -161,4 +159,4 @@ GuardVM 是一個確定性的上下文生成上下文狀態機。它根據載入
 ```
 
 ---
-*DROS Specification v7.1 (Epistemic Edition). Authored by Antigravity.*
+*DROS Specification v7.2 (Epistemic Edition). Authored by 康宸園有限公司*

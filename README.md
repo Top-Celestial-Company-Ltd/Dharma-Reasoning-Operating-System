@@ -2,9 +2,7 @@
 
 <img src="dros_logo.svg" width="300" alt="DROS Logo">
 
-# ☸️ Deterministic Runtime OS (DROS) v7.3
-
-[繁體中文](README_zh.md) | [English](README.md)
+# ☸️ Deterministic Runtime OS (DROS) v7.2.0
 
 **The Thinnest OS Kernel in the World, Powering the Thickest Philosophical Reasoning.**
 
@@ -14,7 +12,6 @@
 [![Official Website](https://img.shields.io/badge/Official-dr--os.io-gold.svg)](https://dr-os.io)
 [![Documentation](https://img.shields.io/badge/Docs-Read-blue.svg)](https://dr-os.io/docs)
 [![Commercial Shield](https://img.shields.io/badge/Protected%20By-VajraClaw-red.svg)](https://github.com/Top-Celestial-Company-Ltd/VajraClaw)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20764666.svg)](https://doi.org/10.5281/zenodo.20764666)
 
 <br/>
 <br/>
@@ -22,7 +19,7 @@
 
 ## 📌 What is DROS?
 
-**Deterministic Runtime Operating System (DROS)** is the world's first AI runtime engine built on a **Microkernel + Physical File Discipline** architecture. 
+**Dharma Reasoning Operating System (DROS)** is the world's first AI runtime engine built on a **Microkernel + Physical File Discipline** architecture. 
 
 It fundamentally solves the three biggest pain points of Enterprise AI Agents:
 1. **Hallucinations** (Unpredictable logic failures)
@@ -71,17 +68,6 @@ To get started with DROS, you only need to write a simple Markdown file (The Vaj
 ```
 
 For complete integration tutorials, API references, and architectural whitepapers, please visit our **[Official Documentation](https://dr-os.io/docs)**.
-
----
-
-## 📚 Publications & Prior Art
-
-To establish legal and academic prior art (preventing malicious patent claims on our core technologies), the theoretical foundations and architectures of the DROS ecosystem have been officially anchored on **Zenodo** with permanent cryptographic timestamps:
-
-*   **Zero-Trust Identity**: *Execution Identity in Multi-Agent Systems: A Zero-Trust Runtime Governance Architecture* — [10.5281/zenodo.20775794](https://doi.org/10.5281/zenodo.20775794)
-*   **Ontological Routing (v7.3)**: *Deterministic Ontological Routing Framework for Domain-Restricted LLM Systems: Design and Implementation of DROS v7.3* — [10.5281/zenodo.20776076](https://doi.org/10.5281/zenodo.20776076)
-*   **Physical Circuit Breaking**: *Constraint-as-Code: Deterministic LLM Governance via Buddhist Doctrinal Classification and Physical Circuit Breaking* — [10.5281/zenodo.20776291](https://doi.org/10.5281/zenodo.20776291)
-*   **VajraClaw Infrastructure**: *DROS for Shielding Prompt Contamination and Hallucination: Runtime Governance Infrastructure for VajraAgent and VajraClaw* — [10.5281/zenodo.20776374](https://doi.org/10.5281/zenodo.20776374)
 
 ---
 

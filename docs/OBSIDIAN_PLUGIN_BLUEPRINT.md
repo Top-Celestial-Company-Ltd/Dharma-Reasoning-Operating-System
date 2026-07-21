@@ -1,26 +1,24 @@
-# 🔌 DROS Doctrinal Copilot - Obsidian Plugin Development Blueprint
+# 🔌 DROS Doctrinal Copilot - Obsidian 插件開發藍圖 (Plugin Blueprint)
 
-## Building the Ultimate Local "Tripitaka Doctrinal Companion" Plugin
+## 🪷 打造最速降線的「隨身三藏十二部伴學」與「義理書僮」外掛
 
-[繁體中文](OBSIDIAN_PLUGIN_BLUEPRINT_zh.md) | [English](OBSIDIAN_PLUGIN_BLUEPRINT.md)
+> **"Simplicity is the ultimate sophistication. By empowering the Obsidian ecosystem, DROS brings sovereign reasoning straight to the行者's fingertips."**  
+> ── 康宸園有限公司/Jimmy Chen
 
-> **"Simplicity is the ultimate sophistication. By empowering the Obsidian ecosystem, DROS brings sovereign reasoning straight to the practitioner's fingertips."**  
-> ── Top Celestial Company Ltd. / Jimmy Chen
-
-This blueprint provides the complete architectural design, core TypeScript interfaces, Svelte sidebar component styling, and a two-stage development roadmap (from local API bridging to a zero-dependency local WASM engine) for the official **DROS Doctrinal Copilot** Obsidian plugin.
+本藍圖旨在為 **DROS Doctrinal Copilot (DROS 義理書僮)** 官方 Obsidian 插件提供完整的架構設計、核心 TypeScript 接口規格、Svelte 側邊欄組件樣式、以及從「本地 API 橋接」到「純本地 WASM 零依賴引擎」的兩階段開發路線圖。
 
 ---
 
-## 🏛️ 1. Directory Structure
+## 🏛️ 一、 插件物理結構 (Anatomy of the Plugin)
 
-A standard DROS Obsidian plugin directory contains the following files:
+一個標準的 DROS Obsidian 插件在目錄中由以下檔案組成：
 
 ```text
 dros-copilot/
-├── manifest.json         # Plugin manifest (name, version, dependencies)
-├── styles.css            # Dark Zen and Glassmorphism stylesheet
-├── main.ts               # Plugin entry (registers Ribbon button, hotkeys, sidebar view)
-└── ChatPanel.svelte      # Svelte-based chat panel and card preview interface
+├── manifest.json         # 插件身份證（聲明名稱、版本、相依性）
+├── styles.css            # 暗黑禪風與玻璃擬態樣式表
+├── main.ts               # 插件入口（註冊 Ribbon 按鈕、命令快捷鍵、側邊欄視圖）
+└── ChatPanel.svelte      # 使用 Svelte 建構的流式渲染對話與卡片預覽介面
 ```
 
 ### 1. manifest.json
@@ -30,8 +28,8 @@ dros-copilot/
   "name": "DROS Doctrinal Copilot",
   "version": "1.0.0",
   "minAppVersion": "1.0.0",
-  "description": "Dharma Reasoning OS local companion and doctrinal anchoring Copilot. Provides Vajra/Bodhisattva dual-contract reasoning, one-click synaptic bi-directional linking, and doctrinal card anchoring.",
-  "author": "Top Celestial Company Ltd. / Jimmy Chen",
+  "description": "Deterministic Runtime OS 隨身伴學與義理定錨 Copilot。提供金剛/菩薩雙軌合約推理、一鍵神經突觸雙向編織與義理卡片定錨。",
+  "author": "康宸園有限公司/Jimmy Chen",
   "authorUrl": "https://github.com/JimmyChen-KC",
   "isDesktopOnly": false
 }
@@ -39,18 +37,18 @@ dros-copilot/
 
 ---
 
-## ⚡ 2. Stage 1: Local Proxy Bridge (Fastest MVP)
+## ⚡ 二、 第一階段：Local Proxy 橋接架構 (Fastest MVP)
 
-In Stage 1, the plugin acts as a frontend GUI that calls the local FastAPI backend `gemini_proxy.py` (which runs in the background using approx. 100MB of RAM).
+在第一階段，插件作為前端 GUI，直接調用本機背景運行、佔用 100MB 內存的 FastAPI `gemini_proxy.py` 服務。
 
 ```
-[ Obsidian UI Panel ] ───(HTTP fetch/stream)───> [ http://127.0.0.1:8080/v1/chat/completions ]
+[ Obsidian UI Panel ] ───(HTTP fetch/stream)───> [ http://127.0.0.1:8000/chat ]
         │                                                     │
         ▼                                                     ▼
-[ Select text Alt+D ] ───────────────────────────────────> [ Query 16,347 in-memory dict ]
+[ 選中文字 Alt+D ] ───────────────────────────────────> [ 讀取本地 16,071 內存字典 ]
 ```
 
-### 1. main.ts
+### 1. main.ts (核心代碼實現)
 ```typescript
 import { Plugin, WorkspaceLeaf, ItemView, Notice, requestUrl } from 'obsidian';
 
@@ -62,14 +60,15 @@ class DrosChatView extends ItemView {
     }
 
     getViewType() { return VIEW_TYPE_DROS_CHAT; }
-    getDisplayText() { return "DROS Doctrinal Copilot"; }
-    getIcon() { return "dharmachakra"; } // Custom wheel icon
+    getDisplayText() { return "DROS 義理書僮"; }
+    getIcon() { return "dharmachakra"; } // 自訂法輪圖標
 
     async onOpen() {
         const container = this.containerEl.children[1];
         container.empty();
         container.createEl("h3", { text: "🪷 DROS Copilot Panel" });
         
+        // 這裡將掛載 Svelte 組件
         const chatContainer = container.createDiv({ cls: "dros-chat-container" });
         // new ChatPanel({ target: chatContainer });
     }
@@ -77,42 +76,45 @@ class DrosChatView extends ItemView {
 
 export default class DrosCopilotPlugin extends Plugin {
     async onload() {
-        console.log('DROS Doctrinal Copilot successfully loaded! 🪷');
+        console.log('DROS Doctrinal Copilot 成功啟動！🪷');
 
+        // 註冊側邊欄 View
         this.registerView(VIEW_TYPE_DROS_CHAT, (leaf) => new DrosChatView(leaf));
 
-        this.addRibbonIcon('dharmachakra', 'Start DROS Companion', () => {
+        // 在左側 Ribbon 區加入一鍵啟動按鈕
+        this.addRibbonIcon('dharmachakra', '啟動 DROS 伴學', () => {
             this.activateView();
         });
 
-        // Register hotkey Alt + D for local card anchoring and query
+        // 註冊快捷鍵 Alt + D：選中名相就地定錨與義理查詢
         this.addCommand({
             id: 'dros-quick-lookup',
-            name: 'DROS: Local Doctrinal Anchoring & Query',
+            name: 'DROS：就地義理定錨與查詢',
             hotkeys: [{ modifiers: ["Alt"], key: "d" }],
             editorCallback: async (editor, view) => {
                 const selectedText = editor.getSelection().trim();
                 if (!selectedText) {
-                    new Notice('Please select the doctrinal term you wish to anchor first!');
+                    new Notice('請先選中您要定錨的義理名相！');
                     return;
                 }
 
-                new Notice(`🔍 Querying DROS anchoring for: ${selectedText}...`);
+                new Notice(`🔍 正在向 DROS 請求定錨：${selectedText}...`);
 
                 try {
                     const response = await requestUrl({
-                        url: 'http://127.0.0.1:8080/v1/chat/completions',
+                        url: 'http://127.0.0.1:8000/chat',
                         method: 'POST',
                         contentType: 'application/json',
                         body: JSON.stringify({ query: selectedText })
                     });
 
-                    // Anchor the selected text into [[Concept]] format
+                    // 在編輯器中將選中文字一鍵定錨為 [[名相]]
                     editor.replaceSelection(`[[${selectedText}]]`);
                     
-                    new Notice(`【DROS Doctrinal Anchoring Success】\n${response.json.reply}`);
+                    // 彈出禪風卡片提示
+                    new Notice(`【DROS 義理定錨成功】\n${response.json.reply}`);
                 } catch (err) {
-                    new Notice('❌ DROS Local Proxy not running. Please launch "gemini_proxy.py"!');
+                    new Notice('❌ DROS 後端未啟動，請執行「DROS金剛注射器.bat」！');
                 }
             }
         });
@@ -133,9 +135,9 @@ export default class DrosCopilotPlugin extends Plugin {
 
 ---
 
-## 🎨 3. Zen and Glassmorphic UI Design (Styles & Svelte CSS)
+## 🎨 三、 禪風與玻璃擬態 UI 設計 (Styles & Svelte CSS)
 
-To invoke a "digital temple" atmosphere, the interface features **dark Zen styling, Glassmorphism, and gold/jade halos**:
+為了營造極致的「數位道場」氛圍，插件界面採用 **暗黑禪風 + 玻璃擬態 (Glassmorphism) + 金色/玉色微光**：
 
 ```css
 /* styles.css */
@@ -143,14 +145,14 @@ To invoke a "digital temple" atmosphere, the interface features **dark Zen styli
     background: rgba(30, 30, 30, 0.65) !important;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 215, 0, 0.15); /* Vajra Gold Border */
+    border: 1px solid rgba(255, 215, 0, 0.15); /* 金剛金色微框 */
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     color: #e0e0e0;
 }
 
-/* Bodhisattva Mode Toggle Button */
+/* 菩薩隨流模式切換鈕 */
 .dros-route-switch {
     background: linear-gradient(135deg, rgba(0, 128, 128, 0.2), rgba(255, 215, 0, 0.2));
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -165,10 +167,10 @@ To invoke a "digital temple" atmosphere, the interface features **dark Zen styli
     transform: translateY(-1px);
 }
 
-/* Dharma Card (Doctrinal Card) */
+/* 義理卡片 (Dharma Card) */
 .dros-dharma-card {
     background: rgba(255, 255, 255, 0.05);
-    border-left: 3px solid #ffd700; /* Vajra Gold Line */
+    border-left: 3px solid #ffd700; /* 金色定錨線 */
     border-radius: 4px;
     padding: 10px;
     margin: 8px 0;
@@ -178,14 +180,14 @@ To invoke a "digital temple" atmosphere, the interface features **dark Zen styli
 
 ---
 
-## 🕸️ 4. Stage 2: Zero-Ops Local TS/WASM Engine (No-Python)
+## 🕸️ 四、 第二階段：Zero-Ops 純離線 TS/WASM 引擎 (No-Python)
 
-To enable zero-configuration for general users, Stage 2 migrates DROS topological routing directly into the plugin's JS engine:
+為了實現大眾化零配置普及，在第二階段我們將徹底剔除 Python 背景服務，直接將 **DROS 內存拓撲尋址** 移植到插件的 JS 引擎中：
 
-1.  **Golden Manifest JSON**:
-    *   On release, a compiler script compresses metadata (T-Numbers, definitions, Tiantai/Yogacara weights, and bidirectional links) of all 16,347 nodes into a highly optimized `dros_golden_manifest.json` (approx 5MB).
-2.  **JS Graph Engine**:
-    *   Loads this JSON directly in `main.ts` and implements the graph retrieval algorithm in TypeScript:
+1.  **JSON 資產化 (Golden Manifest JSON)**：
+    *   在每次 Release 時，使用 Python 腳本將 16,071 個節點的元數據（T-Number、定義、天台/唯識權重、雙向連結網格）編譯成一個高度壓縮的 `dros_golden_manifest.json`（約 5MB）。
+2.  **JS 圖譜尋址器 (JS Graph Engine)**：
+    *   在 `main.ts` 中直接載入此 JSON，並用 TypeScript 實現我們的圖譜搜尋算法：
     ```typescript
     class DrosLocalEngine {
         private graph: Map<string, any> = new Map();
@@ -196,12 +198,12 @@ To enable zero-configuration for general users, Stage 2 migrates DROS topologica
             }
         }
 
-        // O(1) millisecond local query
+        // O(1) 毫秒級本地定錨與關聯檢索
         lookup(term: string) {
             return this.graph.get(term) || null;
         }
 
-        // Synaptic Weaving: identify all 16,347 terms in text and return coordinates
+        // 突觸編織：尋找文本中包含的 16,071 個名相，並返回突觸坐標
         weave(text: string): string[] {
             const matched: string[] = [];
             this.graph.forEach((value, key) => {
@@ -211,22 +213,24 @@ To enable zero-configuration for general users, Stage 2 migrates DROS topologica
         }
     }
     ```
-3.  **Direct LLM API Connection**:
-    *   Users configure their personal `Gemini API Key` directly in Obsidian.
-    *   The plugin performs graph retrieval and prompt assembly locally, fetching directly from the Google API via browser `fetch` without any server mediation. This guarantees **100% privacy and zero operational costs**.
+3.  **直連 LLM API**：
+    *   用戶直接在 Obsidian 插件設定面板中填入個人的 `Gemini API Key`。
+    *   插件在本地完成圖譜檢索與 Prompt 合約拼裝，直接通過網頁端 `fetch` 發送請求給 Google API 端點，完全不需要任何雲端伺服器中轉！這實現了真正的 **「100% 隱私保護與零營運成本」**！
 
 ---
 
-## 🚀 5. Distribution Strategy
+## 🚀 五、 發佈與生態收割策略 (Distribution Strategy)
 
-1.  **Testing Release (BRAT)**:
-    *   Push repository to GitHub.
-    *   Instruct beta testers to install the `BRAT` plugin and add the repository URL for quick updates.
-2.  **Official Registry**:
-    *   Submit a Pull Request to `obsidianmd/obsidian-releases`. Once approved, the plugin is searchable in the community store.
-3.  **Data Monetization**:
-    *   The plugin code is fully open-source under **AGPL-3.0**.
-    *   The complete `dros_golden_manifest.json` dataset (16,347 verified concept nodes) is proprietary. The free version bundles 500 high-frequency terms, requiring a license key subscription to unlock the full database. This implements our dual-licensing strategy: **Open-Source Software, Commercial Data**.
+1.  **測試期 (BRAT Release)**：
+    *   將此目錄推送到 `https://github.com/JimmyChen-KC/obsidian-dros-copilot`。
+    *   通知行者與種子研究者，在 Obsidian 中安裝 `BRAT` 插件，填入上述 Git 網址即可立刻搶先體驗。
+2.  **官方發佈 (Official Registry)**：
+    *   對 `obsidianmd/obsidian-releases` 提交 Pull Request，審核通過後，全球用戶均可在官方插件市場搜尋到 `DROS Doctrinal Copilot`。
+3.  **商業數據金鑰 (Data Monetization)**：
+    *   插件代碼完全開源（滿足 AGPL-3.0 協定）。
+    *   `dros_golden_manifest.json`（16,071 個實心節點的完整校對黃金數據）採取 **CC BY-NC-SA 4.0** 專利授權。
+    *   **無鎖定全量開放**：無論是免費用戶或開發者，皆可直接載入完整的 1.6 萬個節點進行個人修行與學術驗證，無需解鎖。
+    *   **商業授權 (Commercial License)**：若欲將此高密度資料集與引擎用於商業營利用途，請聯絡官方取得 Commercial License 進行商業豁免。此舉完美落實了「軟體開源、無私利他、但嚴懲商業白嫖」的防禦戰略！
 
 ---
-*DROS v7.3 (Epistemic Edition) - Obsidian Plugin Development Blueprint. Created by Top Celestial Company Ltd. / Jimmy Chen.*
+*DROS v7.1 (Epistemic Edition) - Obsidian Plugin Development Blueprint. Created by 康宸園有限公司/Jimmy Chen.*

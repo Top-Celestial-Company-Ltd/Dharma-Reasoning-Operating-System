@@ -1,7 +1,5 @@
 # 🚀 DROS v7.2 ➔ v7.3 無痛升級指南 (Upgrade Guide)
 
-[繁體中文](UPGRADE.md) | [English](UPGRADE_en.md)
-
 本指南說明如何將您的 DROS 7.2 系統安全升級至 **v7.3 Doctrinal Copilot 完全體**。本次升級為「零拷貝、零採礦」純軟體治理升級，不需重新跑任何 embedding。
 
 ---

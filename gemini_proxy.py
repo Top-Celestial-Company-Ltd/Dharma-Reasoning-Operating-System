@@ -16,20 +16,5 @@ from proxy.gemini_proxy import app
 
 if __name__ == '__main__':
     print("🌐 DROS Proxy 根目錄入口啟動中 (Port 5000)...")
-    
-    # 同步 Windows 註冊表中的最新 API Key (避開父進程繼承的舊環境變數)
-    import os
-    import winreg
-    try:
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Environment")
-        reg_val, _ = winreg.QueryValueEx(key, "GOOGLE_API_KEY")
-        if reg_val:
-            os.environ["GOOGLE_API_KEY"] = reg_val
-            os.environ["GEMINI_API_KEY"] = reg_val
-            print(f"[*] 已同步註冊表 GOOGLE_API_KEY (後十碼: {reg_val[-10:]})")
-    except Exception as e:
-        print(f"[!] 同步註冊表金鑰失敗: {e}")
-        
     import uvicorn
-    uvicorn.run("proxy.gemini_proxy:app", host='0.0.0.0', port=5000, reload=True)
-
+    uvicorn.run("app", host='0.0.0.0', port=5000)

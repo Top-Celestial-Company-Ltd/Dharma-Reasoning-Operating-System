@@ -1,8 +1,6 @@
 # 🛡️ DROS Ethical & Doctrinal Safety Specification
 **DROS 認識論治理、倫理與推理邊界宣言 (DROS Scope & Safety Boundary Statement)**
 
-[繁體中文](SAFETY.md) | [English](SAFETY_en.md)
-
 ---
 
 ## 🏛️ 1. 倫理與功能邊界宣言 (Scope & Constraints Statement)

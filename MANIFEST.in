@@ -9,7 +9,6 @@ include install.sh
 include run.bat
 include run.sh
 include 雙擊執行-DROS金剛注射器.bat
-include run_vajra_injector.bat
 
 # 遞迴包含所有非程式碼的法義與契約資源
 recursive-include contracts *.yaml

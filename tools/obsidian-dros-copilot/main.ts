@@ -58,11 +58,11 @@ const LOCALIZATION = {
         saveNoteError: "❌ 儲存筆記失敗: ",
         linkNoticeSuccess: "📎 當前筆記內容已加入 AI 推理上下文！",
         linkNoticeCancel: "📎 已取消筆記連結",
-        connError: "❌ 無法與 DROS 後端取得連線。請雙擊執行「run_vajra_injector.bat」啟動 Quart API 服務 (連接埠 5000)！",
+        connError: "❌ 無法與 DROS 後端取得連線。請雙擊執行「雙擊執行-DROS金剛注射器.bat」啟動 Quart API 服務 (連接埠 5000)！",
         noticeSelectText: "請先選中您要定錨的義理名相！",
         noticeRequesting: "🔍 正在向 DROS 請求定錨：",
         noticeAnchorSuccess: "【DROS 義理定錨成功】",
-        noticeNoBackend: "❌ DROS 後端未啟動，請執行「run_vajra_injector.bat」！",
+        noticeNoBackend: "❌ DROS 後端未啟動，請執行「DROS金剛注射器.bat」！",
         unnamed: "未命名名相",
         anchorRecord: "DROS 義理定錨記錄",
         coreDoctrinal: "核心義理",
@@ -80,7 +80,7 @@ const LOCALIZATION = {
             installTitle: "📥 簡易安裝三步驟 | Simple 3-Step Installation",
             installSteps: [
                 "<strong>啟用外掛</strong>：進入 <code>設定 (Settings)</code> -> <code>社群外掛載入 (Community Plugins)</code>，找到 <strong>DROS Doctrinal Copilot</strong> 並點擊啟用。",
-                "<strong>啟動本地後端</strong>：前往專案根目錄，執行 <code>run_vajra_injector.bat</code> 啟動本地知識守護後端服務（若採 Gemini 直連模式則免此步）。",
+                "<strong>啟動本地後端</strong>：前往專案根目錄，執行 <code>雙擊執行-DROS金剛注射器.bat</code> 啟動本地知識守護後端服務（若採 Gemini 直連模式則免此步）。",
                 "<strong>喚醒伴學面板</strong>：點擊 Obsidian 左側功能列的 <strong>🪷 輪寶圖標 (Dharma Chakra Icon)</strong> 即可展開右側對話伴學視窗！"
             ],
             sopTitle: "💡 極簡操作 SOP",
@@ -180,11 +180,11 @@ const LOCALIZATION = {
         saveNoteError: "❌ Failed to save note: ",
         linkNoticeSuccess: "📎 Active note content linked to AI context!",
         linkNoticeCancel: "📎 Unlinked active note context",
-        connError: "❌ Failed to connect to DROS. Please double-click 'run_vajra_injector.bat' to launch the Quart API (Port 5000)!",
+        connError: "❌ Failed to connect to DROS. Please double-click 'DROS金剛注射器.bat' to launch the Quart API (Port 5000)!",
         noticeSelectText: "Please select a doctrinal term to anchor first!",
         noticeRequesting: "🔍 Requesting anchoring from DROS: ",
         noticeAnchorSuccess: "[DROS Doctrinal Anchoring Succeeded]",
-        noticeNoBackend: "❌ DROS backend is offline, please run 'run_vajra_injector.bat'!",
+        noticeNoBackend: "❌ DROS backend is offline, please run 'DROS金剛注射器.bat'!",
         unnamed: "Unnamed Concept",
         anchorRecord: "DROS Doctrinal Anchor Record",
         coreDoctrinal: "Core Doctrine",
@@ -202,7 +202,7 @@ const LOCALIZATION = {
             installTitle: "📥 Simple 3-Step Installation",
             installSteps: [
                 "<strong>Enable Plugin</strong>: Go to <code>Settings</code> -> <code>Community Plugins</code>, find <strong>DROS Doctrinal Copilot</strong> and enable it.",
-                "<strong>Start Local Backend</strong>: Go to the project root directory and double-click <code>run_vajra_injector.bat</code> to start the local backend service (not needed for Gemini direct mode).",
+                "<strong>Start Local Backend</strong>: Go to the project root directory and double-click <code>DROS金剛注射器.bat</code> to start the local backend service (not needed for Gemini direct mode).",
                 "<strong>Open Copilot Panel</strong>: Click the <strong>🪷 Dharma Chakra Icon</strong> in the left ribbon to expand the chat panel on the right!"
             ],
             sopTitle: "💡 Quick Operation SOP",
@@ -418,30 +418,6 @@ async function getLocalNodeContent(app: App, coreNodes: string[], relatedNodes: 
                 return;
             }
             let contentText = await app.vault.read(file);
-
-            // 🚨 DROS 7.3 核心升級：若節點為「虛空指針」，動態解析 t_coordinates 並從大覺藏中召回經文
-            if (contentText.includes('node_type: "Void Pointer"') || contentText.includes('node_type: Void Pointer')) {
-                const coordMatch = contentText.match(/t_coordinates:\s*\[(.*?)\]/);
-                if (coordMatch) {
-                    const tList = coordMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''));
-                    const allFiles = app.vault.getMarkdownFiles();
-                    for (const tNum of tList) {
-                        if (!tNum) continue;
-                        const matchedFile = allFiles.find(f => f.name.startsWith(tNum) && f.path.toLowerCase().includes("vault_dajuezang/"));
-                        if (matchedFile) {
-                            let vContent = await app.vault.read(matchedFile);
-                            let truncV = vContent.substring(0, 6000);
-                            if (vContent.length > 6000) {
-                                truncV += "\n... (以下經文長度超限，已自動折疊) ...\n";
-                            }
-                            context += `\n--- 經文載入: ${matchedFile.basename} (${tNum}) ---\n${truncV}\n`;
-                            totalLen += truncV.length;
-                        }
-                    }
-                }
-                return;
-            }
-
             let data = "";
 
             const summaryRegex = /> \[!NOTE\] (?:核心義理|歷史精鍊).*?\n(?:> .*?\n)+/is;

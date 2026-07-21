@@ -397,7 +397,7 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
                 return;
             }
             let contentText = await app.vault.read(file);
-            // 🚨 DROS 7.3 核心升級：若節點為「虛空指針」，動態解析 t_coordinates 並從大覺藏中召回經文
+            // 🚨 DROS 8.0 核心升級：若節點為「虛空指針」，動態解析 t_coordinates 並從大覺藏中召回經文
             if (contentText.includes('node_type: "Void Pointer"') || contentText.includes('node_type: Void Pointer')) {
                 const coordMatch = contentText.match(/t_coordinates:\s*\[(.*?)\]/);
                 if (coordMatch) {
@@ -687,8 +687,11 @@ async function queryDrosEngine(query, contractId, customPromptContent, lang, app
                 if (hasStrongAuthority) {
                     runtimeMode = contractData.InferenceMode || "Bodhisattva";
                     temperature = contractData.Temperature !== undefined ? contractData.Temperature : 0.2;
-                    if (contractData.Model)
-                        modelToUse = contractData.Model;
+                    if (contractData.Model) {
+                        modelToUse = effectiveSettings.engineMode === "custom" && effectiveSettings.customModel
+                            ? effectiveSettings.customModel
+                            : contractData.Model;
+                    }
                 }
                 else {
                     runtimeMode = contractData.FallbackMode || "Bodhisattva";
@@ -748,7 +751,7 @@ Require Authority Coordinates (T-Number): ${runtimeMode === "Vajra"}
             promptTemplate = `# DROS 核心提示詞：v5.5 契約感知與雙軌智慧引擎
 
 ## 🛑 系統核心定位
-你是 DROS 7.2 的「法義推理與認識論治理單元」。你的所有行為完全由本次注入的 \`{{EXECUTION_CONTRACT}}\`、\`{{RUNTIME_MODE}}\` 與 \`{{INJECTED_NODES}}\` 決定。除此之外，其餘世界皆不存在。
+你是 DROS 8.0 的「法義推理與認識論治理單元」。你的所有行為完全由本次注入的 \`{{EXECUTION_CONTRACT}}\`、\`{{RUNTIME_MODE}}\` 與 \`{{INJECTED_NODES}}\` 決定。除此之外，其餘世界皆不存在。
 
 ## 📥 本次運行注入
 - \`{{EXECUTION_CONTRACT}}\`：當前完整契約
@@ -784,11 +787,12 @@ Require Authority Coordinates (T-Number): ${runtimeMode === "Vajra"}
 `;
         }
         const targetLanguage = lang === "ZH" ? "Traditional Chinese (zh-TW)" : "Academic English (en-US)";
+        const promptRuntimeMode = (runtimeMode === "Vajra" || runtimeMode === "Interpretive") ? "Vajra" : "Bodhisattva";
         const systemContent = promptTemplate
-            .replace("{{EXECUTION_CONTRACT}}", contractEnvelopeText)
-            .replace("{{INJECTED_NODES}}", context.trim() ? context : "（未檢索到相關權威節點）")
-            .replace("{{RUNTIME_MODE}}", runtimeMode)
-            .replace("{{TARGET_LANGUAGE}}", targetLanguage);
+            .replace(/{{EXECUTION_CONTRACT}}/g, contractEnvelopeText)
+            .replace(/{{INJECTED_NODES}}/g, context.trim() ? context : "（未檢索到相關權威節點）")
+            .replace(/{{RUNTIME_MODE}}/g, promptRuntimeMode)
+            .replace(/{{TARGET_LANGUAGE}}/g, targetLanguage);
         let finalPrompt = systemContent + `\n\n【使用者問題】：${query}`;
         // ------------------ 分流發送 ------------------
         if (effectiveSettings.engineMode === "custom") {
@@ -1190,7 +1194,7 @@ class DrosChatView extends obsidian_1.ItemView {
                 existingFile = this.app.vault.getAbstractFileByPath(fullPath);
                 counter++;
             }
-            // 根據當前語言輸出 DROS 7.0 結構化定錨標籤
+            // 根據當前語言輸出 DROS 8.0 結構化定錨標籤
             let markdownContent = `# ${t.anchorRecord}\n\n`;
             markdownContent += `> [!NOTE] ${t.coreDoctrinal}\n`;
             markdownContent += `> - **${t.searchTerm}**：[[${query}]]\n`;
