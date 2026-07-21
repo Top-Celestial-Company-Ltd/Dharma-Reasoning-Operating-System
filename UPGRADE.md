@@ -1,68 +1,49 @@
-# 🚀 DROS v7.2 ➔ v7.3 無痛升級指南 (Upgrade Guide)
+# 🚀 DROS v8.0.0 一鍵完全體升級指南 (Upgrade Guide)
 
-本指南說明如何將您的 DROS 7.2 系統安全升級至 **v7.3 Doctrinal Copilot 完全體**。本次升級為「零拷貝、零採礦」純軟體治理升級，不需重新跑任何 embedding。
-
----
-
-## 🛠️ 升級步驟
-
-### 第一步：拉取/覆蓋最新代碼
-
-請拉取 GitHub 倉庫最新代碼，或手動覆蓋以下 5 個核心組件檔案：
-1. `config.yaml` ➔ 全域配置文件
-2. `src/config.py` ➔ 配置加載器
-3. `src/retrieval/graphify.py` ➔ 檢索核心
-4. `proxy/gemini_proxy.py` ➔ 網關核心
-5. `gemini_proxy.py` ➔ 根目錄啟動入口
+本指南說明如何將您的 DROS 系統安全升級至 **v8.0.0 Epistemic Complete Edition (認識論完備版)**。
+本次升級包含 **`core/` 知識庫（28,600+ 義理節點）** 與 **`Obsidian 專用外掛 (dros-doctrinal-copilot)`** 的雙向升級。
 
 ---
 
-### 第二步：更新設定檔 (`config.yaml`)
+## ⚡ 方式一：Git 一鍵同步更新（最推薦 ── 單一指令全量升級）
 
-請在您本地的 `config.yaml` 的 `system:` 區塊下，新增 `max_quote_slices` 參數：
+若您的專案是透過 Git 管理，**只需要一行指令**，即可同時完成 `core/` 知識庫與 Obsidian 外掛的同步更新：
 
-```yaml
-# ====================== 系統行為 ======================
-system:
-  hardening_level: 7
-  default_mode: "Bodhisattva"
-  authority_nodes_only: true
-  max_context_length: 12000
-  warning_context_length: 8000
-  max_quote_slices: 3  # ➔ [新增] 單次打撈原典之最大切片數，用以熔斷防禦 Token 爆炸 (HTTP 400)
-```
-
-*(註：若未填寫此欄位，v7.3 系統亦會自動回退並以安全值 3 運行。)*
-
----
-
-### 第三步：(選配) 掛載大覺藏實體庫
-
-如果您擁有「大覺藏」實體經文庫，您現在可以非常安全地掛載它，完全不用擔心 400 錯誤或義理污染：
-1. 將大覺藏資料夾放進您的專案根目錄（或建立 Junction 目錄接合點）。
-2. 在 `config.yaml` 中配置大覺藏路徑：
-   ```yaml
-   paths:
-     vault: "./Vault_DajueZang"
-   ```
-3. 重啟服務，DROS v7.3 會自動啟用**「宗派物理目錄過濾」**與**「引文配額折疊」**安全網。
-
----
-
-### 第四步：無痛 API 金鑰配置 (Obsidian 插拔即用)
-
-在 v7.3 中，您**不再需要**在 Windows / Linux 的系統環境變數中手動配置 `GOOGLE_API_KEY`。
-- **使用方式**：直接在您的 Obsidian 插件（如 Copilot / Smart Connections）的設定面板中，填入您新鮮有效的 Gemini API Key 即可。
-- **機制**：DROS 7.3 網關在收到請求時，會自動攔截 Authorization Header 中的金鑰並向後傳遞給 Gemini SDK，實現多租戶與「插拔即用」的自癒效果。
-
----
-
-### 第五步：熱啟動服務
-
-在終端機中重新執行：
 ```bash
+# 1. 一次性拉取最新的 core 知識庫、網關與 Obsidian 外掛
+git pull origin main
+
+# 2. 清除舊版記憶體快取（讓系統重構 v8.0 的 28,600+ 節點圖譜）
+# Windows PowerShell:
+Remove-Item .graphify_cache.pkl -ErrorAction Ignore
+# Linux / macOS:
+rm -f .graphify_cache.pkl
+
+# 3. 熱重啟網關
 python gemini_proxy.py
 ```
-系統會檢測到代碼變更，自動清除舊的快取檔 (`.graphify_cache.pkl`)，並以微秒級速度重新完成 In-Memory 索引預熱。
 
-恭喜您！您的 DROS 系統已完美升級至 v7.3 完全體！
+*在 Obsidian 中按下 `Ctrl + R`（或重新開啟外掛），外掛與 core 庫即同步升級完成！*
+
+---
+
+## 📦 方式二：Zip 手動全包覆蓋更新
+
+若是下載 Zip 壓縮包的使用者，亦可一次性拖曳完成：
+
+1. 解開 v8.0.0 Zip 包。
+2. 將包含 `core/`、`.obsidian/`、`gemini_proxy.py` 的**所有內容一次性複製並覆蓋**至您的原專案資料夾中。
+3. 刪除舊快取檔 `.graphify_cache.pkl` 並執行 `python gemini_proxy.py` 即可！
+
+---
+
+## 🛡️ 資料安全保證（個人筆記與大覺藏安全說明）
+
+DROS 採用「物理解耦架構」：
+- **`core/` 官方庫**：升級僅替換官方 28,600+ 個義理節點。
+- **用戶掛載庫（如 `Vault_DajueZang/` 或自訂筆記）**：位於 `core/` 之外，**升級時 100% 獨立保留，絕不覆蓋**！
+- 重開服務後，系統會在記憶體中自動融合 `core/` 新節點與您的大覺藏經文。
+
+---
+
+*DROS v8.0.0 認識論完備版 ── 帝網重重，一鍵通達。* 🎛️🛡️⚙️☸️
