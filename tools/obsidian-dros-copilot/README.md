@@ -44,4 +44,12 @@ DROS Doctrinal Copilot 是為 DROS (Deterministic Runtime OS) 系統量身打造
 當 AI 給出具有高度啟發性的答覆時，點擊回覆下方的 `💾 存入館藏` 按鈕，即可一鍵將精美的結構化對話紀錄自動存檔至您的筆記庫中。
 
 ---
+
+## ⚖️ 專利保護與開源聲明 | Patent Notice & License
+
+- **Patent Notice**: DROS execution governance and security technology is protected under U.S. Provisional Patent Application (U.S. PPA No. 64/111,973, Patent Pending).
+- **專利聲明**： DROS 執行治理與安全技術已申請美國臨時專利保護（U.S. Patent Application No. 64/111,973，Patent Pending）。
+- **License**: Released under the MIT License. Copyright (c) Top Celestial Company Ltd.
+
+---
 *Dros Doctrinal Copilot — 願以此功德，普及於一切。我等與眾生，皆共成佛道。*
