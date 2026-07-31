@@ -1,4 +1,4 @@
-# 🏯 DROS 7.2.0: Deterministic Runtime Operating System (Epistemic Edition)
+# 🏯 DROS 8.0.0: Deterministic Runtime Operating System (Epistemic Edition)
 
 ## 數位佛堂：認識論感知與多層級推理作業系統架構白皮書
 
@@ -16,7 +16,7 @@ DROS (Deterministic Runtime Operating System) 不是傳統的問答機器人，�
 
 DROS 的底層模組設計嚴格遵循了現代作業系統的核心抽象，並於本地 PC 環境實現輕量化解耦運行：
 
-1. **語義記憶體 (RAM / Semantic Memory)**：由 `Graphify` 驅動的 16,071 個具備拓撲關係的原子節點，提供高效率的本地圖譜尋址。
+1. **語義記憶體 (RAM / Semantic Memory)**：由 `Graphify` 驅動的 36,057 個具備拓撲關係的原子節點，提供高效率的本地圖譜尋址。
 2. **層級檔案系統 (Hierarchical Filesystem)**：由 `PageIndex` 驅動的卷、品、科判樹狀 FAT 表，實現原典文本的動態滑動窗口載入。
 3. **內核安全沙盒 (Security Sandbox)**：宗派物理隔離與認識論邊界控制，阻止跨宗派教理或未經標注的湧現性推論非法輸出。
 4. **推理契約編譯器 (Inference Contract Compiler)**：將靜態的 YAML 規則描述編譯為動態執行 DAG，將模型的內部推理狀態與認識論權限外部化。
@@ -66,7 +66,7 @@ graph TD
 
 ### 📂 節點分類學物理矩陣 (Node Taxonomy)
 
-經過本地語義硬化手術，全庫 16,071 個實體 Markdown 節點結構分佈已完全標準化：
+經過本地語義硬化手術，全庫 36,057 個實體 Markdown 節點結構分佈已完全標準化：
 
 | 節點類型 | 識別特徵 | 執行權限與功能角色 | 數據佔比 |
 | :--- | :--- | :--- | :---: |
@@ -147,10 +147,10 @@ graph TD
 
 ## 7. 智慧算力調度與安全對齊 (DROS Smart Scheduler & Model Aliasing)
 
-DROS 7.2.0 引入了「算力、模型別名與法義耦合」調度機制，在滿足 Google API parity 的同時，確保推理深度與資源成本達成最優平衡。
+DROS 8.0.0 引入了「算力、模型別名與法義耦合」調度機制，在滿足 Google API parity 的同時，確保推理深度與資源成本達成最優平衡。
 
 ### 7.1 模型別名安全防禦 (Model Alias Resolver)
-在本地 Quart 網關代理層（`gemini_proxy.py`）中，DROS 7.2.0 內置了**模型別名解析引擎**：
+在本地 Quart 網關代理層（`gemini_proxy.py`）中，DROS 8.0.0 內置了**模型別名解析引擎**：
 *   當客戶端（如 Obsidian Copilot）發送 `"pro"` 或 `"gemini-3.1-pro"` 時，系統會自動在底層解析並安全映射至 Google 實際可用且完全支持的頂級旗艦模型——`"gemini-3.1-pro-preview"`。
 *   這精確解決了因 API key 版本不支持 `gemini-1.5-pro` 或 generic `gemini-3.1-pro` 導致的 **404 models not found** 異常，實現了 100% 的請求高可用率。
 
@@ -163,13 +163,13 @@ DROS 7.2.0 引入了「算力、模型別名與法義耦合」調度機制，在
 
 ## 8. Obsidian Copilot 多層級集成代理模式 (Obsidian Copilot & Proxy)
 
-DROS 7.2.0 將 **Obsidian Copilot 集成代理模式 (`gemini_proxy.py`)** 列為官方推薦的開發與部署選項，支持無缝的 Markdown 筆記協同與動態契約控制。
+DROS 8.0.0 將 **Obsidian Copilot 集成代理模式 (`gemini_proxy.py`)** 列為官方推薦的開發與部署選項，支持無缝的 Markdown 筆記協同與動態契約控制。
 
 ```mermaid
 graph LR
     User[使用者] <-->|1. 統一介面| Obsidian[Obsidian Copilot]
     Obsidian <-->|2. JSON Payload / contract 參數| Proxy[gemini_proxy.py 代理伺服器]
-    Proxy <-->|3. 核心檢索| Core[core/ 16,071 原子節點]
+    Proxy <-->|3. 核心檢索| Core[core/ 36,057 原子節點]
     Proxy <-->|4. 載入行為憲法| Boundary[DROS_BOUNDARY.md]
     Proxy <-->|5. 金剛語意約束| LLM[Gemini 核心運算 / models/gemini-3.1-pro-preview]
 ```
@@ -187,7 +187,7 @@ graph LR
 
 ## 9. 🔌 內核微分離與就地配置 (Microkernel Decoupling & In-place Mutation)
 
-在 DROS 7.2.0 中，我們解決了兩個核心的工程難題，大幅提升了微內核的存續彈性與強健度：
+在 DROS 8.0.0 中，我們解決了兩個核心的工程難題，大幅提升了微內核的存續彈性與強健度：
 
 ### 9.1 語義檢索微內核解耦 (Graphify Decoupling)
 DROS 核心引擎已演進為極致輕量化的 **微內核 (Microkernel) 架構**：
@@ -202,15 +202,15 @@ DROS 核心引擎已演進為極致輕量化的 **微內核 (Microkernel) 架構
 
 ## 10. ⚖️ 雙軌特許授權架構 (Strategic Dual-Licensing Architecture)
 
-DROS 7.2.0 採用了基於「密碼學時間戳 (Cryptographic Timestamping)」與「強授權引擎」的雙軌保護模式，最大化推廣佛法的同時，嚴密保全了核心技術資產：
+DROS 8.0.0 採用了基於「密碼學時間戳 (Cryptographic Timestamping)」與「強授權引擎」的雙軌保護模式，最大化推廣佛法的同時，嚴密保全了核心技術資產：
 
 1. **引擎代碼 ── GNU AGPL-3.0 授權**：
    所有 DROS core code（Runtime, AST, GuardVM, Proxy 等微內核）皆完全開源，並受 **GNU AGPL-3.0** 嚴格限制。這有效防止了任何商業機構在不開放原始碼的前提下，將本引擎修改並作為網路雲端 SaaS 服務營利。
 
 2. **黃金本體數據 (1.6 萬節點) ── 弘法公益完全免費 / 商業機構嚴格限制**：
-   藉由 SHA-256 數位指紋宣示主權後，這 **16,071 個極高精度的實心名相本體** 採取特許授權：
+   藉由 SHA-256 數位指紋宣示主權後，這 **36,057 個極高精度的實心名相本體** 採取特許授權：
    - **個人與純公益授權**：凡為「弘法利生、眾生學佛使用、純佛法公益性質」（且排除任何具備受償或有償營運模式的單位），黃金資料庫**完全免費**開放使用。
    - **機構與商業使用**：其他非上述純公益之實體（包括所有機構單位、組織等），若需整合核心引擎或調用黃金資料，必須受到 AGPL 限制，並向 **康宸園有限公司/Jimmy Chen** 取得 **DROS 商業授權**。
 
 ---
-*Status: DROS-v7.2-Epistemic Dual-Licensing & Three-Layer Specification Fully Completed and Active.*
+*Status: DROS-v8.0.0-Epistemic Dual-Licensing & Three-Layer Specification Fully Completed and Active.*

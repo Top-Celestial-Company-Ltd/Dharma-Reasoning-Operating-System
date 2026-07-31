@@ -45,7 +45,7 @@ dros-copilot/
 [ Obsidian UI Panel ] ───(HTTP fetch/stream)───> [ http://127.0.0.1:8000/chat ]
         │                                                     │
         ▼                                                     ▼
-[ 選中文字 Alt+D ] ───────────────────────────────────> [ 讀取本地 16,071 內存字典 ]
+[ 選中文字 Alt+D ] ───────────────────────────────────> [ 讀取本地 36,057 內存字典 ]
 ```
 
 ### 1. main.ts (核心代碼實現)
@@ -185,7 +185,7 @@ export default class DrosCopilotPlugin extends Plugin {
 為了實現大眾化零配置普及，在第二階段我們將徹底剔除 Python 背景服務，直接將 **DROS 內存拓撲尋址** 移植到插件的 JS 引擎中：
 
 1.  **JSON 資產化 (Golden Manifest JSON)**：
-    *   在每次 Release 時，使用 Python 腳本將 16,071 個節點的元數據（T-Number、定義、天台/唯識權重、雙向連結網格）編譯成一個高度壓縮的 `dros_golden_manifest.json`（約 5MB）。
+    *   在每次 Release 時，使用 Python 腳本將 36,057 個節點的元數據（T-Number、定義、天台/唯識權重、雙向連結網格）編譯成一個高度壓縮的 `dros_golden_manifest.json`（約 5MB）。
 2.  **JS 圖譜尋址器 (JS Graph Engine)**：
     *   在 `main.ts` 中直接載入此 JSON，並用 TypeScript 實現我們的圖譜搜尋算法：
     ```typescript
@@ -203,7 +203,7 @@ export default class DrosCopilotPlugin extends Plugin {
             return this.graph.get(term) || null;
         }
 
-        // 突觸編織：尋找文本中包含的 16,071 個名相，並返回突觸坐標
+        // 突觸編織：尋找文本中包含的 36,057 個名相，並返回突觸坐標
         weave(text: string): string[] {
             const matched: string[] = [];
             this.graph.forEach((value, key) => {
@@ -228,9 +228,9 @@ export default class DrosCopilotPlugin extends Plugin {
     *   對 `obsidianmd/obsidian-releases` 提交 Pull Request，審核通過後，全球用戶均可在官方插件市場搜尋到 `DROS Doctrinal Copilot`。
 3.  **商業數據金鑰 (Data Monetization)**：
     *   插件代碼完全開源（滿足 AGPL-3.0 協定）。
-    *   `dros_golden_manifest.json`（16,071 個實心節點的完整校對黃金數據）採取 **CC BY-NC-SA 4.0** 專利授權。
+    *   `dros_golden_manifest.json`（36,057 個實心節點的完整校對黃金數據）採取 **CC BY-NC-SA 4.0** 專利授權。
     *   **無鎖定全量開放**：無論是免費用戶或開發者，皆可直接載入完整的 1.6 萬個節點進行個人修行與學術驗證，無需解鎖。
     *   **商業授權 (Commercial License)**：若欲將此高密度資料集與引擎用於商業營利用途，請聯絡官方取得 Commercial License 進行商業豁免。此舉完美落實了「軟體開源、無私利他、但嚴懲商業白嫖」的防禦戰略！
 
 ---
-*DROS v7.1 (Epistemic Edition) - Obsidian Plugin Development Blueprint. Created by 康宸園有限公司/Jimmy Chen.*
+*DROS v8.1 (Epistemic Edition) - Obsidian Plugin Development Blueprint. Created by 康宸園有限公司/Jimmy Chen.*

@@ -159,4 +159,4 @@ GuardVM 是一個確定性的上下文生成上下文狀態機。它根據載入
 ```
 
 ---
-*DROS Specification v7.2 (Epistemic Edition). Authored by 康宸園有限公司*
+*DROS Specification v8.0.0 (Epistemic Edition). Authored by 康宸園有限公司*

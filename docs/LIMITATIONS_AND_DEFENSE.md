@@ -24,7 +24,7 @@
 
 ### 2. 冷啟動的「隨機 I/O 磁碟風暴」 (Random I/O Cold Start Storm)
 *   **批判內容**：
-    > *「DROS 在啟動時需要遍歷 16,071 個獨立的 Markdown 檔案。每次 `open()`、`read()`、`close()` 都是一次作業系統級的隨機 I/O 系統調用（System Call），如果是在碎片化嚴重的機械硬碟（HDD）或雲端慢速磁碟上，啟動時間會長到令人崩潰！」*
+    > *「DROS 在啟動時需要遍歷 36,057 個獨立的 Markdown 檔案。每次 `open()`、`read()`、`close()` 都是一次作業系統級的隨機 I/O 系統調用（System Call），如果是在碎片化嚴重的機械硬碟（HDD）或雲端慢速磁碟上，啟動時間會長到令人崩潰！」*
 *   **技術缺陷**：
     *   作業系統處理「讀取一個 160MB 的單一二進位大檔案」，比處理「讀取 16,000 個 10KB 的小純文字檔案」快上百倍。因為後者需要進行 16,000 次檔案描述符（File Descriptor）的分配、目錄索引節點（Inode）的定錨、以及物理磁碟磁頭的隨機尋道。
     *   傳統資料庫會將所有數據緊湊地儲存在連續的資料頁（Data Pages）中，順序讀取效率極高。DROS 在冷啟動或重啟時，對磁碟隨機讀取的物理開銷是極大的。
@@ -99,4 +99,4 @@ DROS 7.2 不是死板的數據容器，它是一部**「理事無礙、化繁為
 這是一場有尊嚴的架構抉擇 ── **以簡馭繁，法輪常轉。**
 
 ---
-*DROS v7.2 (Epistemic Edition) - Design Limitations & Strategic Defense. All Rights Reserved by 康宸園有限公司/Jimmy Chen.*
+*DROS v8.0.0 (Epistemic Edition) - Design Limitations & Strategic Defense. All Rights Reserved by 康宸園有限公司/Jimmy Chen.*

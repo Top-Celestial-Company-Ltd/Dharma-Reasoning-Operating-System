@@ -2,7 +2,7 @@
 **DROS 系統行為邊界與認識論防護原則**
 
 ```text
-Status: DROS-v7.2-Boundary-Finalized
+Status: DROS-v8.0.0-Boundary-Finalized
 Parent Specification: SAFETY.md
 Compliance Level: Strictly Enforced by GuardVM
 ```
@@ -47,4 +47,4 @@ DROS 7.2+ 是一個旨在對大語言模型（LLM）進行精確文獻檢索與�
 DROS 的核心價值在於提供**認識論層面之 AI 治理（AI Doctrinal Governance）**。理上的結構化對齊是系統的功能邊界；而實修中的身口意證量，則需依止現實世界之具德上師與行者自身之精進。
 
 ---
-*DROS v7.2. Maintained by 康宸園有限公司/Jimmy Chen & Antigravity AI.*
+*DROS v8.0.0. Maintained by 康宸園有限公司/Jimmy Chen & Antigravity AI.*

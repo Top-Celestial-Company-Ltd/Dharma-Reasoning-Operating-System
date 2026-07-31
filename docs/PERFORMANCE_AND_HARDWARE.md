@@ -58,4 +58,4 @@ DROS 在設計之初，就秉持著「不增加使用者本地硬體負擔」的
 * **Bodhisattva (菩薩模式)**：允許隨流聯想與現代詮釋，生成字數較多，適合在安靜的時間進行深入探討。
 
 ---
-*Deterministic Runtime OS v7.2 — 輕量智慧，法音隨流。*
+*Deterministic Runtime OS v8.0.0 — 輕量智慧，法音隨流。*

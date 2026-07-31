@@ -1,4 +1,4 @@
-# 🏛️ DROS v7.3 Architecture & Design Justification
+# 🏛️ DROS v8.0.0 Architecture & Design Justification
 
 ## 架構設計合理性與無資料庫（Serverless Flat-File）典範白皮書
 
@@ -13,7 +13,7 @@ DROS (Dharma Reasoning OS) 7.3 採取了完全相反的降維打擊策略 ──
 
 ## 📂 一、 核心設計：檔案系統即資料庫 (Filesystem as Database)
 
-DROS 拋棄了傳統的 SQL/NoSQL 資料庫，直接將本機作業系統原生的層級資料夾系統與 **16,071 個純文字 Markdown 檔案** 當成我們的「持久化儲存資料庫」。
+DROS 拋棄了傳統的 SQL/NoSQL 資料庫，直接將本機作業系統原生的層級資料夾系統與 **36,057 個純文字 Markdown 檔案** 當成我們的「持久化儲存資料庫」。
 
 ### 💡 為什麼這是最合理的架構抉擇？
 
@@ -30,7 +30,7 @@ DROS 拋棄了傳統的 SQL/NoSQL 資料庫，直接將本機作業系統原生�
 
 ## ⚡ 二、 高併發併發物理機制：語義記憶體 (Semantic RAM)
 
-極客或後端開發者常問的一個問題是：「多人同時查找時，作業系統去硬碟讀取 16,071 個檔案，硬碟 I/O 不就瞬間被卡死了嗎？」
+極客或後端開發者常問的一個問題是：「多人同時查找時，作業系統去硬碟讀取 36,057 個檔案，硬碟 I/O 不就瞬間被卡死了嗎？」
 
 ### 🚀 DROS 的極速記憶體定錨解決方案：
 
@@ -38,10 +38,10 @@ DROS 絕不在每次用戶查詢時去觸碰硬碟。系統運作嚴格遵循 **
 
 1. **內存索引預熱 (In-Memory Index Warm-up)**：
    * 在系統啟動（Start-up）時，DROS 微內核的 `GraphifyRetriever` 模組會對 `core/` 目錄進行**一次性物理掃描**。
-   * 將這 16,071 個節點的拓撲關係、T-Number 座標與核心義理，編譯成一組輕量化的高效 Python Dictionary 物件常駐於 RAM（隨機存取記憶體）中。
+   * 將這 36,057 個節點的拓撲關係、T-Number 座標與核心義理，編譯成一組輕量化的高效 Python Dictionary 物件常駐於 RAM（隨機存取記憶體）中。
 2. **$O(1)$ 複雜度雜湊尋址 (Hash-map Table lookup)**：
    * 當線上使用者（或 Obsidian Copilot）發送查詢請求時，DROS 直接在**記憶體中進行 $O(1)$ 複雜度的變數讀取**，完全繞過物理磁碟 I/O。
-   * 讀取 16,071 個硬化節點的索引僅佔用 **50MB - 100MB RAM**。因為 footprint（記憶體佔用）極度微小，多個 Uvicorn ASGI Worker 進程可並行常駐，徹底釋放多核心 CPU 性能。
+   * 讀取 36,057 個硬化節點的索引僅佔用 **50MB - 100MB RAM**。因為 footprint（記憶體佔用）極度微小，多個 Uvicorn ASGI Worker 進程可並行常駐，徹底釋放多核心 CPU 性能。
 
 ---
 
@@ -53,7 +53,7 @@ DROS 絕不在每次用戶查詢時去觸碰硬碟。系統運作嚴格遵循 **
 【DROS CQRS 讀寫分離架構】
 
     [唯寫沙盒 / Write Sandbox]
-    Obsidian (研經開採區) ────> 物理落地 (core/ 16,071 .md 檔案)
+    Obsidian (研經開採區) ────> 物理落地 (core/ 36,057 .md 檔案)
                                                         │
                                                         │ (一次性掃描啟動 / reload)
                                                         ▼
@@ -97,13 +97,13 @@ DROS 內部深藏了五大為了追求極致效能與佛法對齊而設計的技
 
 ### 5. 🔑 Bearer Token 動態金鑰路由 (Dynamic Authorization Routing)
 - **巧思**：在 Windows 開發與生產混雜的環境中，環境變數（`GOOGLE_API_KEY`）常因 IDE 重啟、終端機變更或金鑰過期而失效。
-- **機制**：DROS v7.3 新增了 HTTP 請求頭金鑰路由。當 API 被呼叫時，後端會自動攔截 Authorization Header 中的 Bearer token。若客戶端（如 Obsidian Copilot 插件）配置了新鮮的金鑰，系統會動態覆蓋環境變數並向後傳遞，免除了系統管理員頻繁配置系統環境變數的痛點。
+- **機制**：DROS v8.0.0 新增了 HTTP 請求頭金鑰路由。當 API 被呼叫時，後端會自動攔截 Authorization Header 中的 Bearer token。若客戶端（如 Obsidian Copilot 插件）配置了新鮮的金鑰，系統會動態覆蓋環境變數並向後傳遞，免除了系統管理員頻繁配置系統環境變數的痛點。
 
 ---
 
-## 🛠️ 五、 DROS v7.3 升級實錄與技術架構 (v7.3 Doctrinal Copilot Upgrades)
+## 🛠️ 五、 DROS v8.0.0 升級實錄與技術架構 (v8.0.0 Doctrinal Copilot Upgrades)
 
-為解決大覺藏掛載後造成 Token 爆炸（HTTP 400 錯誤）與跨宗派義理污染的問題，v7.3 版本正式引入了以下兩大核心安全治理機制：
+為解決大覺藏掛載後造成 Token 爆炸（HTTP 400 錯誤）與跨宗派義理污染的問題，v8.0.0 版本正式引入了以下兩大核心安全治理機制：
 
 ### 1. 宗派物理目錄過濾 (Sectarian Metadata Filtering)
 - **問題**：若不加限制，Graphify 在模糊匹配時，常將天台宗的概念對齊到阿毗達摩的經文，造成跨館越界打撈，污染大模型的語境認知。

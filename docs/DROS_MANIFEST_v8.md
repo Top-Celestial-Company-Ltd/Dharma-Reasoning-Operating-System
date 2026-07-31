@@ -29,7 +29,7 @@
 *   T0223_摩訶般若波羅蜜經_016-p_---.md (0.8 KB)
 *   T0278_《大方廣佛華嚴經》.md (2043.8 KB)
 *   T0279_《大方廣佛華嚴經》.md (2105.3 KB)
-*   T0279_華嚴經_PageIndex_v7.md (4000.9 KB)
+*   T0279_華嚴經_PageIndex_v8.md (4000.9 KB)
 *   T0293_《大方廣佛華嚴經》.md (1041.0 KB)
 *   T0670_楞伽阿跋多羅寶經_wiki_---.md (0.7 KB)
 *   T0670_楞伽阿跋多羅寶經_wiki_關聯.md (0.9 KB)
@@ -38,19 +38,19 @@
 
 ## 🛠️ 系統組件 (System Components)
 ### 📄 Docs
-*   ARCHITECTURE_v7.md
+*   ARCHITECTURE_v8.md
 *   DESIGN_JUSTIFICATION.md
-*   DROS-System-Report-v7.2.0.md
+*   DROS-System-Report-v8.0.0.md
 *   DROS_BOUNDARY.md
-*   DROS_MANIFEST_v7.md
+*   DROS_MANIFEST_v8.md
 *   DROS_MICROKERNEL_SPEC.md
 *   DROS_Sectarian_Validation_Report.md
 *   LIMITATIONS_AND_DEFENSE.md
 *   OBSIDIAN_PLUGIN_BLUEPRINT.md
 *   PERFORMANCE_AND_HARDWARE.md
 *   System_Prompt_v5.5.md
-*   USER_GUIDE_v7.md
-*   USER_GUIDE_v7_EN.md
+*   USER_GUIDE_v8.md
+*   USER_GUIDE_v8_EN.md
 *   devlog
 
 ### 📄 Tools
@@ -59,7 +59,7 @@
 *   dros_contract_ast.py
 *   dros_dna_enricher.py
 *   dros_guard_vm.py
-*   dros_sdk_v7.py
+*   dros_sdk_v8.py
 *   gemini_proxy.py
 *   obsidian-dros-copilot
 *   雙擊執行-DROS金剛注射器.bat
@@ -16986,26 +16986,26 @@
 *   core\Long_Classics\T0223_摩訶般若波羅蜜經_016-p_---.md
 *   core\Long_Classics\T0278_《大方廣佛華嚴經》.md
 *   core\Long_Classics\T0279_《大方廣佛華嚴經》.md
-*   core\Long_Classics\T0279_華嚴經_PageIndex_v7.md
+*   core\Long_Classics\T0279_華嚴經_PageIndex_v8.md
 *   core\Long_Classics\T0293_《大方廣佛華嚴經》.md
 *   core\Long_Classics\T0670_楞伽阿跋多羅寶經_wiki_---.md
 *   core\Long_Classics\T0670_楞伽阿跋多羅寶經_wiki_關聯.md
 *   core\Long_Classics\T0676_016.玄奘三藏譯撰全輯解深密經_-_唐_玄奘譯-台灣_王穆提_疏文斷句_版權說明.md
 *   core\Long_Classics\T0676_016.玄奘三藏譯撰全輯解深密經_-_唐_玄奘譯-台灣_王穆提_疏文斷句_贊助.md
 *   core\System_Docs\萬點大覺藏生成紀錄.md
-*   docs\ARCHITECTURE_v7.md
+*   docs\ARCHITECTURE_v8.md
 *   docs\DESIGN_JUSTIFICATION.md
-*   docs\DROS-System-Report-v7.2.0.md
+*   docs\DROS-System-Report-v8.0.0.md
 *   docs\DROS_BOUNDARY.md
-*   docs\DROS_MANIFEST_v7.md
+*   docs\DROS_MANIFEST_v8.md
 *   docs\DROS_MICROKERNEL_SPEC.md
 *   docs\DROS_Sectarian_Validation_Report.md
 *   docs\LIMITATIONS_AND_DEFENSE.md
 *   docs\OBSIDIAN_PLUGIN_BLUEPRINT.md
 *   docs\PERFORMANCE_AND_HARDWARE.md
 *   docs\System_Prompt_v5.5.md
-*   docs\USER_GUIDE_v7.md
-*   docs\USER_GUIDE_v7_EN.md
+*   docs\USER_GUIDE_v8.md
+*   docs\USER_GUIDE_v8_EN.md
 *   docs\devlog\six_paths_great_union.md
 *   inbox\AI 善導_wiki_三惡道.md
 *   inbox\AI 善導_wiki_不退轉.md
@@ -17175,7 +17175,7 @@
 *   tools\dros_contract_ast.py
 *   tools\dros_dna_enricher.py
 *   tools\dros_guard_vm.py
-*   tools\dros_sdk_v7.py
+*   tools\dros_sdk_v8.py
 *   tools\gemini_proxy.py
 *   tools\雙擊執行-DROS金剛注射器.bat
 *   tools\contracts\default_vajra.yaml
