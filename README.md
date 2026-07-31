@@ -1,34 +1,24 @@
 <div align="center">
 
-<img src="dros_logo.svg" width="300" alt="DROS Logo">
-
-# ☸️ Deterministic Runtime OS (DROS) v7.2.0
-
-**The Thinnest OS Kernel in the World, Powering the Thickest Philosophical Reasoning.**
+# ☸️ Dharma Reasoning Operation System (DROS) v8.0.0
 
 **DROS-RFC-001: Multi-Language Micro-Kernel Reference Implementation & Parity Verification**
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
-[![Official Website](https://img.shields.io/badge/Official-dr--os.io-gold.svg)](https://dr-os.io)
-[![Documentation](https://img.shields.io/badge/Docs-Read-blue.svg)](https://dr-os.io/docs)
-[![Commercial Shield](https://img.shields.io/badge/Protected%20By-VajraClaw-red.svg)](https://github.com/Top-Celestial-Company-Ltd/VajraClaw)
+[![Data License: CC BY-NC-SA 4.0](https://img.shields.io/badge/Data%20License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Specification: DROS-RFC-001](https://img.shields.io/badge/Specification-DROS--RFC--001-darkgreen.svg)](specs/DROS-RFC-001.md)
 
-<br/>
 <br/>
 </div>
 
-## 📌 What is DROS?
-
-**Dharma Reasoning Operating System (DROS)** is the world's first AI runtime engine built on a **Microkernel + Physical File Discipline** architecture. 
-
-It fundamentally solves the three biggest pain points of Enterprise AI Agents:
-1. **Hallucinations** (Unpredictable logic failures)
-2. **Prompt Injections** (Security bypass vulnerabilities)
-3. **Runaway Costs** (Excessive Token usage for "LLM-as-a-Judge" safety checks)
-
-Unlike traditional RAG (Retrieval-Augmented Generation) or complex Vector Databases, DROS uses deterministic **Vajra Contracts (Markdown rules)** combined with a native memory-safe GuardVM to enforce strict boundaries on LLM reasoning at the physical layer.
-
-👉 **[Read the Full Vision on our Official Website](https://dr-os.io)**
+> 💡 **「DROS 是給 AI 用的，不是給人用的。」**  
+> **"DROS is designed for AI, not for humans."**  
+>  
+> **"The thinnest OS kernel in the world, powering the thickest philosophical reasoning."**  
+> **「世上最輕薄的內核，驅動著最深邃的哲學推理。」**  
+>  
+> 這是本系統最重要的創世宣言。DROS 不是「又一個佛學聊天機器人」，而是一個**「治理 LLM 佛法推理的語意運行時系統 (A Semantic Runtime System for Governing LLM Dharma Reasoning)」**。  
+> 它的核心目的，是將神聖且高密度的佛教義理、經律論及名相辭典，轉化為 AI 可讀、可推演、受戒律合約控制的結構化語意實體與推理軌跡軌道，徹底根除大語言模型在法義推理時的幻覺迷霧，實現矽基智能的「名相免疫與正法對齊」。
 
 ---
 
