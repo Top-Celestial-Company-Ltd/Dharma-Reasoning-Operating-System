@@ -35,13 +35,14 @@
 3. **Prepare API Key**: Go to [Google AI Studio](https://aistudio.google.com/) to apply for a Gemini API Key.
 4. **Load DROS Vault**: Open Obsidian, select "Open folder as vault", and point it to this extracted project folder.
 5. **Enable Exclusive Chat Plugin (🔑 CRITICAL STEP)**:
-   - ⚠️ This project already has the exclusive plugin **built-in**. **You DO NOT need to search or download it from the Community Store.**
-   - In the Obsidian interface, click the "Settings (⚙️ Gear icon)" in the bottom left -> select "Community plugins" on the left menu.
-   - Click the **"Turn off Safe Mode"** button.
-   - Find **`DROS Doctrinal Copilot`** in the "Installed plugins" list, and toggle the switch to **On (Enabled)**.
-   - Click the ⚙️ Gear icon next to the plugin name to enter settings:
-     - 🛡️ **If using the local DROS Proxy**: Set `API Endpoint` to `http://127.0.0.1:8080/v1` (points to your local machine).
-     - 🌐 **If connecting directly to Google Gemini API**: Leave `API Endpoint` blank, and paste your Google API Key below.
+   - In the Obsidian interface, click "Settings (⚙️ Gear icon)" -> select "Community plugins" on the left menu.
+   - If using Community Plugins for the first time, click **"Turn off Restricted Mode"**.
+   - Click **"Browse"**, and type **`DROS Doctrinal Copilot`** in the search bar.
+   - Click **"Install"** and then **"Enable"**!
+   - Click the ⚙️ Gear icon next to the plugin name (or click DROS Copilot Settings at the bottom left) to configure settings:
+     - 🌐 **Zero-Ops Direct Mode (Recommended)**: Select `Direct Mode` and enter your Gemini API Key to start studying!
+     - 🔌 **Custom API Mode**: Enter OpenRouter or custom API endpoints and keys (e.g. DeepSeek).
+     - 🛡️ **Local Proxy Mode**: If running local Python environment, select `Proxy Mode` to connect to local gateway.
 6. **Start DROS Core Reasoning Engine (Proxy Server)**: 
    - **Windows Users**: In the project root folder, double-click **`dros-start.bat`**. This will automatically clear old cache and warm up the latest 28,600+ concept graph in seconds.
    - **Mac/Linux Users**: Run `python gemini_proxy.py` in the terminal.

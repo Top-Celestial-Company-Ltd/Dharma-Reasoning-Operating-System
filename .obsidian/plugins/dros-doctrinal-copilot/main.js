@@ -37,11 +37,11 @@ const LOCALIZATION = {
         saveNoteError: "❌ 儲存筆記失敗: ",
         linkNoticeSuccess: "📎 當前筆記內容已加入 AI 推理上下文！",
         linkNoticeCancel: "📎 已取消筆記連結",
-        connError: "❌ 無法與 DROS 後端取得連線。請雙擊執行「run_vajra_injector.bat」啟動 Quart API 服務 (連接埠 5000)！",
+        connError: "❌ 無法與 DROS 後端取得連線。請雙擊執行「雙擊執行-DROS金剛注射器.bat」啟動 Quart API 服務 (連接埠 5000)！",
         noticeSelectText: "請先選中您要定錨的義理名相！",
         noticeRequesting: "🔍 正在向 DROS 請求定錨：",
         noticeAnchorSuccess: "【DROS 義理定錨成功】",
-        noticeNoBackend: "❌ DROS 後端未啟動，請執行「run_vajra_injector.bat」！",
+        noticeNoBackend: "❌ DROS 後端未啟動，請執行「DROS金剛注射器.bat」！",
         unnamed: "未命名名相",
         anchorRecord: "DROS 義理定錨記錄",
         coreDoctrinal: "核心義理",
@@ -59,7 +59,7 @@ const LOCALIZATION = {
             installTitle: "📥 簡易安裝三步驟 | Simple 3-Step Installation",
             installSteps: [
                 "<strong>啟用外掛</strong>：進入 <code>設定 (Settings)</code> -> <code>社群外掛載入 (Community Plugins)</code>，找到 <strong>DROS Doctrinal Copilot</strong> 並點擊啟用。",
-                "<strong>啟動本地後端</strong>：前往專案根目錄，執行 <code>run_vajra_injector.bat</code> 啟動本地知識守護後端服務（若採 Gemini 直連模式則免此步）。",
+                "<strong>啟動本地後端</strong>：前往專案根目錄，執行 <code>雙擊執行-DROS金剛注射器.bat</code> 啟動本地知識守護後端服務（若採 Gemini 直連模式則免此步）。",
                 "<strong>喚醒伴學面板</strong>：點擊 Obsidian 左側功能列的 <strong>🪷 輪寶圖標 (Dharma Chakra Icon)</strong> 即可展開右側對話伴學視窗！"
             ],
             sopTitle: "💡 極簡操作 SOP",
@@ -93,7 +93,7 @@ const LOCALIZATION = {
             },
             synthesizerModel: {
                 name: "🧠 合成與推理模型 | Synthesizer Model",
-                desc: "直連模式下，負責 Stage 3 最終義理合成與深度推理的模型（推薦：gemini-2.5-pro）。⚠️注意：因「金剛合約」對話溫度被鎖定在0.05以確保零幻覺決定性推理，請務必篩選選用邏輯與指令遵循度極高之推理模型（如gemini-2.5-pro, gpt-4o, claude-3-5-sonnet），避免選用創意型或參數較小的弱模型（容易造成無限循環或答非所問）。 | The model responsible for Stage 3 final doctrinal synthesis and deep reasoning (Recommend⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops.ed: gemini-2.5-pro)."
+                desc: "直連模式下，負責 Stage 3 最終義理合成與深度推理的模型（推薦：gemini-2.5-pro）。 | The model responsible for Stage 3 final doctrinal synthesis and deep reasoning (Recommended: gemini-2.5-pro)."
             },
             customEndpoint: {
                 name: "🔌 自訂 API 端點 | Custom API Endpoint",
@@ -101,7 +101,7 @@ const LOCALIZATION = {
             },
             customModel: {
                 name: "🧠 自訂模型名稱 | Custom Model Name",
-                desc: "填寫自訂模型識別名稱 (例如: deepseek/deepseek-chat, gpt-4o 等)。⚠️注意：因「金剛合約」對話溫度被鎖定在0.05以確保零幻覺決定性推理，請務必篩選選用邏輯與指令遵循度極高之推理模型（如gemini-2.5-pro, gpt-4o, claude-3-5-sonnet），避免選用創意型或參數較小的弱模型（容易造成無限循環或答非所問）。 | Custom model identifier (e.g., deepseek-chat). ⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops."
+                desc: "填寫自訂模型識別名稱 (例如: deepseek/deepseek-chat, gpt-4o 等)。 | Custom model identifier (e.g., deepseek-chat)."
             },
             customRouterModel: {
                 name: "🧭 自訂路由模型 | Custom Router Model",
@@ -159,11 +159,11 @@ const LOCALIZATION = {
         saveNoteError: "❌ Failed to save note: ",
         linkNoticeSuccess: "📎 Active note content linked to AI context!",
         linkNoticeCancel: "📎 Unlinked active note context",
-        connError: "❌ Failed to connect to DROS. Please double-click 'run_vajra_injector.bat' to launch the Quart API (Port 5000)!",
+        connError: "❌ Failed to connect to DROS. Please double-click 'DROS金剛注射器.bat' to launch the Quart API (Port 5000)!",
         noticeSelectText: "Please select a doctrinal term to anchor first!",
         noticeRequesting: "🔍 Requesting anchoring from DROS: ",
         noticeAnchorSuccess: "[DROS Doctrinal Anchoring Succeeded]",
-        noticeNoBackend: "❌ DROS backend is offline, please run 'run_vajra_injector.bat'!",
+        noticeNoBackend: "❌ DROS backend is offline, please run 'DROS金剛注射器.bat'!",
         unnamed: "Unnamed Concept",
         anchorRecord: "DROS Doctrinal Anchor Record",
         coreDoctrinal: "Core Doctrine",
@@ -181,7 +181,7 @@ const LOCALIZATION = {
             installTitle: "📥 Simple 3-Step Installation",
             installSteps: [
                 "<strong>Enable Plugin</strong>: Go to <code>Settings</code> -> <code>Community Plugins</code>, find <strong>DROS Doctrinal Copilot</strong> and enable it.",
-                "<strong>Start Local Backend</strong>: Go to the project root directory and double-click <code>run_vajra_injector.bat</code> to start the local backend service (not needed for Gemini direct mode).",
+                "<strong>Start Local Backend</strong>: Go to the project root directory and double-click <code>DROS金剛注射器.bat</code> to start the local backend service (not needed for Gemini direct mode).",
                 "<strong>Open Copilot Panel</strong>: Click the <strong>🪷 Dharma Chakra Icon</strong> in the left ribbon to expand the chat panel on the right!"
             ],
             sopTitle: "💡 Quick Operation SOP",
@@ -215,7 +215,7 @@ const LOCALIZATION = {
             },
             synthesizerModel: {
                 name: "🧠 Synthesizer Model",
-                desc: "In direct mode, the model responsible for Stage 3 final synthesis and deep reasoning (Recommended: gemini-2.5-pro). ⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops."
+                desc: "In direct mode, the model responsible for Stage 3 final synthesis and deep reasoning (Recommended: gemini-2.5-pro)."
             },
             customEndpoint: {
                 name: "🔌 Custom API Endpoint",
@@ -223,7 +223,7 @@ const LOCALIZATION = {
             },
             customModel: {
                 name: "🧠 Custom Model Name",
-                desc: "Custom model identifier name (e.g. deepseek/deepseek-chat, gpt-4o, etc.). ⚠️Note: Since the Vajra Contract temperature is locked at 0.05 for zero-hallucination deterministic reasoning, you must choose a model with exceptionally strong logic and instruction-following capabilities (e.g., gemini-2.5-pro, gpt-4o, claude-3-5-sonnet). Avoid creative or smaller models to prevent infinite loops."
+                desc: "Custom model identifier name (e.g. deepseek/deepseek-chat, gpt-4o, etc.)."
             },
             customRouterModel: {
                 name: "🧭 Custom Router Model",
@@ -312,37 +312,8 @@ function parseContractYaml(yamlText) {
     return res;
 }
 async function nlmQueryAsync(query, notebookName) {
-    if (typeof require === "undefined")
-        return "";
-    try {
-        const { exec } = require("child_process");
-        const notebookMapping = {
-            "AI佛學總論": "387b899a-2095-4f68-945f-e2fa35c5670b",
-            "AI善導大師-淨土宗": "f0535e46-586a-44e2-bffd-59b12b21e77a",
-            "AI龍樹-中觀": "359f6065-dbec-4e5e-b85d-8377c7eea534",
-            "AI惠能-禪宗": "396d76a0-c781-48fe-8a73-534b1d25fc37",
-            "數位佛堂_3.0": "32e46b09-02f5-42d5-91c7-ca8147ffdcaa",
-            "AI彌勒-唯識宗": "b2a15532-edba-4f18-9565-96ab1ab045d9",
-            "AI智者大師-天台宗": "9b4b3b81-7bd6-492b-9e71-63a1c63a60c4",
-        };
-        const notebookId = notebookMapping[notebookName] || notebookName;
-        return new Promise((resolve) => {
-            exec(`nlm query notebook ${notebookId} "${query.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
-                if (error) {
-                    console.warn("NotebookLM RAG fallback failed:", error);
-                    resolve("");
-                }
-                else {
-                    const cleanResult = stdout.replace(/\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])|\[\*\]|\[\+\]/g, "");
-                    resolve(`\n--- NotebookLM Vector RAG 檢索結果 ---\n${cleanResult}\n`);
-                }
-            });
-        });
-    }
-    catch (e) {
-        console.warn("Child process not available for nlm:", e);
-        return "";
-    }
+    // NotebookLM optional CLI query (Disabled for pure Obsidian API compliance)
+    return "";
 }
 async function getLocalNodeContent(app, coreNodes, relatedNodes) {
     const files = app.vault.getMarkdownFiles();
@@ -397,29 +368,6 @@ async function getLocalNodeContent(app, coreNodes, relatedNodes) {
                 return;
             }
             let contentText = await app.vault.read(file);
-            // 🚨 DROS 8.0 核心升級：若節點為「虛空指針」，動態解析 t_coordinates 並從大覺藏中召回經文
-            if (contentText.includes('node_type: "Void Pointer"') || contentText.includes('node_type: Void Pointer')) {
-                const coordMatch = contentText.match(/t_coordinates:\s*\[(.*?)\]/);
-                if (coordMatch) {
-                    const tList = coordMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''));
-                    const allFiles = app.vault.getMarkdownFiles();
-                    for (const tNum of tList) {
-                        if (!tNum)
-                            continue;
-                        const matchedFile = allFiles.find(f => f.name.startsWith(tNum) && f.path.toLowerCase().includes("vault_dajuezang/"));
-                        if (matchedFile) {
-                            let vContent = await app.vault.read(matchedFile);
-                            let truncV = vContent.substring(0, 6000);
-                            if (vContent.length > 6000) {
-                                truncV += "\n... (以下經文長度超限，已自動折疊) ...\n";
-                            }
-                            context += `\n--- 經文載入: ${matchedFile.basename} (${tNum}) ---\n${truncV}\n`;
-                            totalLen += truncV.length;
-                        }
-                    }
-                }
-                return;
-            }
             let data = "";
             const summaryRegex = /> \[!NOTE\] (?:核心義理|歷史精鍊).*?\n(?:> .*?\n)+/is;
             const quoteRegex = /> \[(?:!QUOTE|!NOTE)\] (?:原典引文|跨館開採|語義融合).*?\n(?:> .*?\n)+/is;
@@ -687,11 +635,8 @@ async function queryDrosEngine(query, contractId, customPromptContent, lang, app
                 if (hasStrongAuthority) {
                     runtimeMode = contractData.InferenceMode || "Bodhisattva";
                     temperature = contractData.Temperature !== undefined ? contractData.Temperature : 0.2;
-                    if (contractData.Model) {
-                        modelToUse = effectiveSettings.engineMode === "custom" && effectiveSettings.customModel
-                            ? effectiveSettings.customModel
-                            : contractData.Model;
-                    }
+                    if (contractData.Model)
+                        modelToUse = contractData.Model;
                 }
                 else {
                     runtimeMode = contractData.FallbackMode || "Bodhisattva";
@@ -751,7 +696,7 @@ Require Authority Coordinates (T-Number): ${runtimeMode === "Vajra"}
             promptTemplate = `# DROS 核心提示詞：v5.5 契約感知與雙軌智慧引擎
 
 ## 🛑 系統核心定位
-你是 DROS 8.0 的「法義推理與認識論治理單元」。你的所有行為完全由本次注入的 \`{{EXECUTION_CONTRACT}}\`、\`{{RUNTIME_MODE}}\` 與 \`{{INJECTED_NODES}}\` 決定。除此之外，其餘世界皆不存在。
+你是 DROS 7.2 的「法義推理與認識論治理單元」。你的所有行為完全由本次注入的 \`{{EXECUTION_CONTRACT}}\`、\`{{RUNTIME_MODE}}\` 與 \`{{INJECTED_NODES}}\` 決定。除此之外，其餘世界皆不存在。
 
 ## 📥 本次運行注入
 - \`{{EXECUTION_CONTRACT}}\`：當前完整契約
@@ -787,12 +732,11 @@ Require Authority Coordinates (T-Number): ${runtimeMode === "Vajra"}
 `;
         }
         const targetLanguage = lang === "ZH" ? "Traditional Chinese (zh-TW)" : "Academic English (en-US)";
-        const promptRuntimeMode = (runtimeMode === "Vajra" || runtimeMode === "Interpretive") ? "Vajra" : "Bodhisattva";
         const systemContent = promptTemplate
-            .replace(/{{EXECUTION_CONTRACT}}/g, contractEnvelopeText)
-            .replace(/{{INJECTED_NODES}}/g, context.trim() ? context : "（未檢索到相關權威節點）")
-            .replace(/{{RUNTIME_MODE}}/g, promptRuntimeMode)
-            .replace(/{{TARGET_LANGUAGE}}/g, targetLanguage);
+            .replace("{{EXECUTION_CONTRACT}}", contractEnvelopeText)
+            .replace("{{INJECTED_NODES}}", context.trim() ? context : "（未檢索到相關權威節點）")
+            .replace("{{RUNTIME_MODE}}", runtimeMode)
+            .replace("{{TARGET_LANGUAGE}}", targetLanguage);
         let finalPrompt = systemContent + `\n\n【使用者問題】：${query}`;
         // ------------------ 分流發送 ------------------
         if (effectiveSettings.engineMode === "custom") {
@@ -1194,7 +1138,7 @@ class DrosChatView extends obsidian_1.ItemView {
                 existingFile = this.app.vault.getAbstractFileByPath(fullPath);
                 counter++;
             }
-            // 根據當前語言輸出 DROS 8.0 結構化定錨標籤
+            // 根據當前語言輸出 DROS 7.0 結構化定錨標籤
             let markdownContent = `# ${t.anchorRecord}\n\n`;
             markdownContent += `> [!NOTE] ${t.coreDoctrinal}\n`;
             markdownContent += `> - **${t.searchTerm}**：[[${query}]]\n`;
@@ -1249,7 +1193,7 @@ class DrosCopilotPlugin extends obsidian_1.Plugin {
         if (mode === "en")
             return "EN";
         try {
-            const obsLang = (window.localStorage.getItem("language") || "en").toLowerCase();
+            const obsLang = (0, obsidian_1.getLanguage)().toLowerCase();
             if (obsLang.includes("zh")) {
                 return "ZH";
             }
@@ -1284,7 +1228,6 @@ class DrosCopilotPlugin extends obsidian_1.Plugin {
         this.addCommand({
             id: 'dros-quick-lookup',
             name: 'DROS：就地義理定錨與查詢 / Doctrinal Anchoring',
-            hotkeys: [{ modifiers: ["Alt"], key: "d" }],
             editorCallback: async (editor, view) => {
                 const selectedText = editor.getSelection().trim();
                 // 動態獲取當前語言
@@ -1373,7 +1316,7 @@ class DrosCopilotPlugin extends obsidian_1.Plugin {
     }
     async activateView() {
         this.app.workspace.detachLeavesOfType(VIEW_TYPE_DROS_CHAT);
-        await this.app.workspace.getRightLeaf(false).setViewState({
+        await this.app.workspace.getLeaf(true).setViewState({
             type: VIEW_TYPE_DROS_CHAT,
             active: true,
         });
@@ -1397,7 +1340,9 @@ class DrosSettingTab extends obsidian_1.PluginSettingTab {
         containerEl.empty();
         const lang = this.plugin.getEffectiveLang();
         const t = LOCALIZATION[lang].settings;
-        containerEl.createEl('h2', { text: t.tabTitle });
+        new obsidian_1.Setting(containerEl)
+            .setName(t.tabTitle)
+            .setHeading();
         // 📖 隨身使用手冊與安裝指引 (Quick Start Guide & Installation Steps)
         const guideDetails = containerEl.createEl('details', {
             cls: 'dros-settings-guide-container',
@@ -1408,15 +1353,22 @@ class DrosSettingTab extends obsidian_1.PluginSettingTab {
             cls: 'dros-settings-guide-summary'
         });
         const guideContent = guideDetails.createDiv({ cls: 'dros-settings-guide-content' });
-        guideContent.createEl('h3', { text: t.installTitle });
+        new obsidian_1.Setting(guideContent)
+            .setName(t.installTitle)
+            .setHeading();
         const stepsOl = guideContent.createEl('ol');
         t.installSteps.forEach(step => {
-            stepsOl.createEl('li').innerHTML = step;
+            const li = stepsOl.createEl('li');
+            // Safe plain text rendering without innerHTML
+            li.setText(step.replace(/<[^>]+>/g, ''));
         });
-        guideContent.createEl('h3', { text: t.sopTitle });
+        new obsidian_1.Setting(guideContent)
+            .setName(t.sopTitle)
+            .setHeading();
         const sopsUl = guideContent.createEl('ul');
         t.sopSteps.forEach(sop => {
-            sopsUl.createEl('li').innerHTML = sop;
+            const li = sopsUl.createEl('li');
+            li.setText(sop.replace(/<[^>]+>/g, ''));
         });
         // 🌐 介面語言 / Interface Language
         new obsidian_1.Setting(containerEl)

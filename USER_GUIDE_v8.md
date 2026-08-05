@@ -35,13 +35,14 @@
 3. **準備 API Key**: 請至 [Google AI Studio](https://aistudio.google.com/) 申請您的 Gemini API Key。
 4. **載入 DROS 知識庫**: 打開 Obsidian，選擇「開啟資料夾作為儲存庫 (Open folder as vault)」，指向您下載解壓縮後的本專案資料夾。
 5. **啟用專屬對話外掛 (🔑 關鍵步驟)**:
-   - ⚠️ 本專案已經**直接內建**了專屬的外掛程式，**您不需要去外掛商店搜尋或下載**。
-   - 在 Obsidian 介面中，點擊左下角的「設定 (⚙️ 齒輪圖示)」 -> 點選左側選單的「第三方外掛程式 (Community plugins)」。
-   - 點擊畫面上的 **「關閉安全模式 (Turn off Safe Mode)」** 按鈕。
-   - 找到 **`DROS Doctrinal Copilot`**，並將右側的開關切換為**打開 (啟用狀態)**。
-   - 點擊該外掛名稱旁邊的 ⚙️ 齒輪圖示（進入外掛設定），進行連線設定：
-     - 🛡️ **若使用本地 DROS 代理伺服器（預設推薦）**：請將 `API Endpoint` 填寫為 `http://127.0.0.1:8080/v1`。
-     - 🌐 **若想直連 Google Gemini API（不開 Proxy）**：請將 `API Endpoint` 留空，並在下方填入您的 Google API Key。
+   - 進入 Obsidian 介面，點擊左下角的「設定 (⚙️ 齒輪圖示)」 -> 點選左側選單的「社群外掛程式 (Community plugins)」。
+   - 若為首次使用，請點擊 **「關閉限制模式 (Turn off Restricted Mode)」**。
+   - 點擊 **「瀏覽 (Browse)」** 按鈕，在搜尋列輸入 **`DROS Doctrinal Copilot`**。
+   - 點擊 **「安裝 (Install)」** 並點擊 **「啟用 (Enable)」**！
+   - 點擊該外掛名稱旁邊的 ⚙️ 齒輪圖示（或點擊左側選單最下方的 DROS Copilot 設定），進行對對答模式設定：
+     - 🌐 **Zero-Ops 直連模式（預設推薦）**：選擇 `Direct Mode` 並填入您的 Gemini API Key 即可開始隨身伴學！
+     - 🔌 **自訂 API 模式**：亦可填入 OpenRouter 或自訂 API 端點與金鑰（如 DeepSeek）。
+     - 🛡️ **本地代理模式**：若配合本機 Python 環境，亦可選擇 `Proxy Mode` 連線本機網關。
 6. **啟動 DROS 核心推理引擎 (代理伺服器)**: 
    - **Windows 用戶**：在專案根目錄中，雙擊執行 **`啟動DROS網關.bat`** (開源版使用者執行 **`dros-start.bat`**)。它會自動清除舊快取，以微秒級速度加載並預熱最新的 28,600+ 概念圖譜。
    - **Mac/Linux 用戶**：請在終端機執行 `python gemini_proxy.py`。
