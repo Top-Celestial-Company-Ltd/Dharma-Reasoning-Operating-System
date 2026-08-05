@@ -51,6 +51,30 @@
 
 ---
 
+## 📱 Mobile (iOS / Android) Quick Start Guide
+
+Mobile devices (iOS/Android) differ slightly from PC setup. **No Python installation is needed on mobile devices**, simply use Direct API mode to take the Tripiṭaka on the go!
+
+### 📲 Step 1: Import DROS Vault to Mobile
+* **Android Users**:
+  1. Use your mobile browser to download the `Dharma-Reasoning-Operating-System` repository ZIP file from GitHub.
+  2. Extract the file, open mobile Obsidian, and select **"Open folder as vault"**, pointing to the extracted folder.
+* **iOS (iPhone / iPad) Users**:
+  1. Open iOS Obsidian and create a new empty vault named `Digital_Dharma`.
+  2. Open the iOS **"Files"** app, and copy the extracted project files (especially `core/` containing the 36,000+ nodes and `User_Pavilion/`) into `Obsidian/Digital_Dharma/`.
+
+### 🔑 Step 2: One-Click Plugin Installation from Store
+1. Open mobile Obsidian, tap **"Settings (⚙️)"** at the bottom right/left menu ➔ **"Community plugins"**.
+2. Turn off Restricted Mode, and tap **"Browse"**.
+3. Search for **`DROS Doctrinal Copilot`**, tap **"Install"**, and then tap **"Enable"**!
+
+### 🌐 Step 3: Configure Direct API Mode
+1. In plugin settings (`DROS Copilot Settings`), keep `Engine Mode` set to **`Direct Mode`**.
+2. Paste your **Gemini API Key** (or custom OpenRouter / DeepSeek key).
+3. Tap the **🪷 Dharma Chakra Icon** in the sidebar to open the chat window and enjoy seamless mobile companion study!
+
+---
+
 ## ⚡ DROS v8.0 Core Breakthroughs: Performance Defense & Auto Pipeline
 
 DROS v8.0 introduces groundbreaking performance optimization and automated mining pipelines to address graph index overload:

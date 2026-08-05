@@ -51,6 +51,30 @@
 
 ---
 
+## 📱 手機端 (iOS / Android) 專屬快速安裝指南
+
+手機端（iOS/Android）與 PC 電腦端在載入方式上有微小差異。手機版 **無需安裝 Python 環境**，只需透過 API 直連即可達成「三藏隨身帶著走」！
+
+### 📲 步驟 1：匯入 DROS 知識庫至手機
+* **Android 使用者**：
+  1. 使用手機瀏覽器前往 GitHub 下載 `Dharma-Reasoning-Operating-System` 專案 ZIP 檔。
+  2. 解壓縮後，打開手機版 Obsidian，點選 **「開啟現有資料夾 (Open folder as vault)」**，指向解壓後的專案資料夾。
+* **iOS (iPhone / iPad) 使用者**：
+  1. 打開 iOS 版 Obsidian，新建一個名為 `數位佛堂` 的空白 Vault。
+  2. 開啟 iOS **「檔案 (Files)」** App，將下載解壓後的專案資料夾內容（特別是包含 3.6萬名相的 `core/` 與 `User_Pavilion/`）複製進 `Obsidian/數位佛堂/` 目錄中。
+
+### 🔑 步驟 2：從社群商店一鍵安裝外掛
+1. 開啟手機版 Obsidian，點選右下角/左側選單的 **「設定 (⚙️)」** ➔ **「社群外掛程式 (Community plugins)」**。
+2. 關閉限制模式 (Turn off Restricted Mode)，點擊 **「瀏覽 (Browse)」**。
+3. 在搜尋列輸入 **`DROS Doctrinal Copilot`**，點擊 **「安裝 (Install)」** 並點擊 **「啟用 (Enable)」**！
+
+### 🌐 步驟 3：設定 API 直連模式
+1. 進入外掛設定頁面（`DROS Copilot Settings`），將 `Engine Mode` 保持為預設的 **`Direct Mode (直連模式)`**。
+2. 貼上您的 **Gemini API Key**（或填寫自訂 OpenRouter / DeepSeek 金鑰）。
+3. 點擊手機介面左側或頂部的 **🪷 輪寶圖標 (Dharma Chakra Icon)**，即可展開對話視窗，享受無縫隨身伴學！
+
+---
+
 ## ⚡ DROS v8.0 核心突破：性能防禦與自動化收網
 
 DROS v8.0 引入了開創性的效能防禦機制與自動化開採管線，徹底解決了萬級節點下 Obsidian 圖譜崩潰的難題：
